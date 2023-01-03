@@ -34,9 +34,11 @@
 \usepackage{siunitx}
 \sisetup{
   locale = DE ,
-  detect-all,
-  binary-units = true
+  detect-all
 }
+
+\usepackage{tikz}
+\definecolor{myblue}{HTML}{92dcec}
 
 \usepackage{listings}
 \lstdefinestyle{MyLatexStyle} {
@@ -119,7 +121,14 @@
   fg=mSybilaRed
 }
 
-\title{Projektpräsentation}
+\makeatletter
+\setlength{\metropolis@titleseparator@linewidth}{2pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{2pt}
+\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+\makeatother
+
+
+\title{Entwicklung von PaMesAn}
 
 % \titlegraphic{\hfill\includegraphics[height=2.5cm]{pictures/python-logo.png}}
 
@@ -128,13 +137,13 @@
 %\titlegraphic{\hfill\includegraphics[height=0.6cm]{sybila-logo/old.png}}
 %\titlegraphic{\hfill\includegraphics[height=0.6cm]{sybila-logo/old-flat.png}}
 
-\date{12.05.2022}
-\author{Julius Caesar, Péter Egermann, Paul Görtler, Johannes Leyrer}
-\institute{BSZ für Elektrotechnik Dresden -- IT20/2}
+\date{11.01.2023}
+\author{Johannes Leyrer}
+\institute{FLYERALARM}
 
-\subtitle{Die hard- und softwaretechnische Implementierung eines CO$_2$-Sensors zur Messung der Raumluftqualität}
+\subtitle{Implementierung eines neuen Systems zur Erfassung von Versandverpackungen mit Hilfe von Bild- und Sensordaten zur Erfüllung der Novelle des Verpackungsgesetzes}
 %\institute{Center for modern beamer themes}
-% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+% \titlegraphic{\hfill\includegraphics[height=0.5cm]{pics/FA_Logo-WM_M_P_1C.pdf}}
 
 \setbeamertemplate{footline}
 {
@@ -159,17 +168,123 @@
 \maketitle
 
 \begin{frame}{Gliederung}
-    \setbeamertemplate{section in toc}[sections]
-    \tableofcontents[hideallsubsections]
+  \setbeamertemplate{section in toc}[sections]
+  \tableofcontents[hideallsubsections]
 \end{frame}
 
-\section{Einleitung}
-\begin{frame}[fragile]{Einleitung}
-    \begin{minipage}[t]{1\textwidth}
-        \begin{quotation}
-            Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-        \end{quotation}
-    \end{minipage}
+\section{Projektumfeld}
+\begin{frame}[fragile]{FLYERALARM GmbH}
+  \centering{\Large{FLYERALARM GmbH}}
+
+  \begin{table}
+    \begin{tabular}{lll}
+      2002      & $>$ 2000    & $>$ 3 Mio \\
+      gegründet & Mitarbeiter & Produkte  \\
+    \end{tabular}
+  \end{table}
+
+  \pause
+
+  \begin{itemize}
+    \item Eines der größten E-Commerce Unternehmen Deutschlands
+          \pause
+    \item Führende Online-Druckerei Europas im B2B-Bereich
+          \pause
+    \item Betreibt eigenen Onlineshop
+          \pause
+    \item Erstellung der Druckdaten
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{FLYERALARM Industrial Print GmbH}
+  \centering{\Large{FLYERALARM Industrial Print GmbH}}
+
+  \begin{table}
+    \begin{tabular}{lll}
+      8         & ca. 1200    \\
+      Standorte & Mitarbeiter \\
+    \end{tabular}
+  \end{table}
+
+  \pause
+
+  \begin{itemize}
+    \item Tochtergesellschaft
+          \pause
+    \item Eigene IT-Abteilung
+          \pause
+    \item Produktion und Versand
+  \end{itemize}
+\end{frame}
+
+\section{Planung}
+\begin{frame}[fragile]{Zeitschätzung Projektphasen}
+  \begin{tikzpicture}
+
+    \draw (0cm,0cm) -- (9.5cm,0cm);  %Abzisse
+    \draw (0cm,0cm) -- (0cm,-0.1cm);  %linkes Ende der Abzisse
+    \draw (9.5cm,0cm) -- (9.5cm,-0.1cm);  %rechtes Ende der Abzisse
+
+    \draw (-0.1cm,0cm) -- (-0.1cm,4.5cm);  %Ordinate
+    \draw (-0.1cm,0cm) -- (-0.2cm,0cm);  %unteres Ende der Ordinate
+    \draw (-0.1cm,4.5cm) -- (-0.2cm,4.5cm) node [left] {h};  %oberes Ende der Ordinate
+
+    \foreach \x in {10,20,...,40}  %Hilfslinien
+    \draw[gray!50, text=black] (-0.2 cm,\x * 0.1 cm) -- (9.5 cm,\x * 0.1 cm)
+    node at (-0.5 cm,\x * 0.1 cm) {\x};  %Beschriftung der Hilfslinien
+
+    \node at (4.5cm,5cm) {Grobe Zeitplanung};  %Überschrift
+
+    \foreach \x/\y/\country in {0.5/10/Analyse,  %\x ist Anfang der Säulen
+        2/8/Entwurf,  %\y ist Höhe der Säulen
+        3.5/39/Implementierung,
+        5/5/Test,
+        6.5/6/Einführung,
+        8/12/Dokumentation}
+      {
+        \draw[fill=mSybilaRed] (\x cm,0cm) rectangle (1cm+\x cm,\y * 0.1 cm) %die Säulen
+        node at (0.5cm + \x cm,\y * 0.1 cm + 0.3cm) {\y}; %die Prozente über den Säulen
+        \node[rotate=45, left] at (0.6 cm +\x cm,-0.1cm) {\country}; %Säulenbeschriftung
+      };
+
+  \end{tikzpicture}
+\end{frame}
+
+\section{Analyse}
+\begin{frame}[fragile]{Analyse}
+  \begin{minipage}[t]{1\textwidth}
+    \begin{quotation}
+      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
+    \end{quotation}
+  \end{minipage}
+\end{frame}
+
+\section{Entwurf}
+\begin{frame}[fragile]{Entwurf}
+  \begin{minipage}[t]{1\textwidth}
+    \begin{quotation}
+      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
+    \end{quotation}
+  \end{minipage}
+\end{frame}
+
+\section{Implementierung}
+\begin{frame}[fragile]{Implementierung}
+  \begin{minipage}[t]{1\textwidth}
+    \begin{quotation}
+      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
+    \end{quotation}
+  \end{minipage}
+\end{frame}
+
+\section{Fazit}
+\begin{frame}[fragile]{Fazit}
+  \begin{minipage}[t]{1\textwidth}
+    \begin{quotation}
+      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
+    \end{quotation}
+  \end{minipage}
 \end{frame}
 
 % \section{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
@@ -308,18 +423,18 @@
 % \end{frame}
 
 \begin{frame}[standout]
-    Fragen?
+  Fragen?
 \end{frame}
 
 \appendix
 
 \begin{frame}[allowframebreaks]{Literaturverzeichnis}
 
-    \printbibliography[title={Quellenverzeichnis}]
+  \printbibliography[title={Quellenverzeichnis}]
 
 \end{frame}
 
 \begin{frame}[standout]
-    Danke für die Aufmerksamkeit!
+  Danke für die Aufmerksamkeit!
 \end{frame}
 \end{document}
