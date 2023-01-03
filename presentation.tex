@@ -251,14 +251,76 @@
   \end{tikzpicture}
 \end{frame}
 
+
 \section{Analyse}
-\begin{frame}[fragile]{Analyse}
-  \begin{minipage}[t]{1\textwidth}
-    \begin{quotation}
-      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-    \end{quotation}
-  \end{minipage}
+\begin{frame}[fragile]{Ist-Analyse}
+  \textbf{Ist-Analyse}
+  \begin{itemize}
+    \item Paketgröße und Anzahl wird manuell gepflegt
+    \item Neue Anforderungen durch  Verpackungsgesetz
+    \item Hoher Wartungsaufwand für Entwickler
+    \item Paketgröße ungenau
+  \end{itemize}
 \end{frame}
+
+
+\begin{frame}[fragile]{Soll-Analyse}
+  \textbf{Soll-Analyse}
+  \begin{itemize}
+    \item Paketgröße und Anzahl automatisch erfassen
+    \item Erfüllung der Anforderungen durch Verpackungsgesetz
+    \item Wartungsaufwand minimieren durch automatische Erfassung
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Angebot der Elektro Löther GmbH}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1\textwidth]{pics/AngebotLoether.png}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{Kostenverteilung Hardware}
+  \begin{table}[htbp]
+    \centering
+    \begin{tabular}{lr}
+      Hardware                    & Gesamt         \\
+      ARCELI Shield Board Kit     & \SI{17.99}{€}  \\
+      AZDelivery 5 x Mega 2560 R3 & \SI{14.99}{€}  \\
+      Benewake TF MINI PLUS       & \SI{182.40}{€} \\
+      Microsoft Lifecam Studio    & \SI{42.99}{€}  \\
+      item-Systemprofile          & \SI{29.52}{€}  \\
+      item-Verbindungsstücke      & \SI{192.00}{€} \\
+      item-Füße                   & \SI{48.00}{€}  \\
+      Dell Wyse 5070 Thin Client  & \SI{450.00}{€} \\
+      \hline
+      Gesamtkosten                & \SI{977.89}{€}
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+
+\begin{frame}[fragile]{Kostenverteilung Personal und Hardware}
+  \begin{table}[htbp]
+    \centering
+    \begin{tabular}{lrrr}
+      Personal       & Zeit in Stunden & Kosten pro Stunde              & Gesamt          \\
+      Auszubildender & 80              & \SI{6.00}{€} + \SI{15.00}{€}   & \SI{1680.00}{€} \\
+      Teamleitung    & 2               & \SI{31.50}{€}  + \SI{15.00}{€} & \SI{93.00}{€}   \\
+      Teammitglied   & 2               & \SI{21.50}{€}  + \SI{15.00}{€} & \SI{73.00}{€}   \\
+      Haustechnik    & 8               & \SI{19.00}{€}  + \SI{15.00}{€} & \SI{272.00}{€}  \\ \hline
+      Gesamtkosten   &                 &                                & \SI{2118.00}{€}
+    \end{tabular}
+  \end{table}
+
+  \vspace{0.4cm}
+
+  \textbf{Gesamtkosten Personal und Hardware: \SI{3095.89}{€}}
+\end{frame}
+
+
 
 \section{Entwurf}
 \begin{frame}[fragile]{Entwurf}
@@ -286,6 +348,20 @@
     \end{quotation}
   \end{minipage}
 \end{frame}
+
+
+% \begin{frame}
+%   \transglitter<2-4> %means that the effect is within the frame but only for slide 2 to 4
+
+%   \frametitle{Test}
+%   \begin{itemize}
+%     \item \onslide<2->{One} %shown from slide 2 till last slide of this frame
+%     \item \onslide<3->{Two}
+%     \item \onslide<4->{Three}
+%   \end{itemize}
+% \end{frame}
+
+
 
 % \section{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
 % \begin{frame}[fragile]{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
