@@ -27,6 +27,9 @@
 \usepackage{xcolor, soul}
 \definecolor{codebackground}{rgb}{0.95, 0.95, 0.92}
 \definecolor{Black}{rgb}{0, 0, 0}
+\definecolor{sqlpurple}{RGB}{201, 53, 84}
+\definecolor{bashred}{RGB}{178, 34, 34}
+\definecolor{cicdlila}{RGB}{135, 103, 218}
 
 
 \usepackage{graphicx}
@@ -77,6 +80,54 @@
   xleftmargin=5.0ex,
   gobble=4
 }
+
+\lstloadlanguages{SQL}
+\lstdefinestyle{sql-style}{
+  backgroundcolor=\color{codebackground},
+  basicstyle=\texttt\tiny,
+  breaklines=true,
+  columns=flexible,
+  commentstyle=\color{teal},
+  escapeinside={<@}{@>}, % for escaping
+  firstnumber=1,
+  flexiblecolumns,
+  frame=tb, % hrule above and below
+  gobble=-4,
+  keepspaces=true,
+  keywordstyle=\color{sqlpurple},
+  language=SQL,
+  morekeywords={datetime, nvarchar, REFERENCES, uniqueidentifier, varbinary},
+  numbers=left, % {none, left, right}
+  numbersep=5pt,
+  numberstyle=\scriptsize\color{black},
+  showstringspaces=false,
+  stringstyle=\color{sqlpurple},
+  xleftmargin=5.0ex
+}
+
+\lstloadlanguages{Bash}
+\lstdefinestyle{bash-style}{
+  backgroundcolor=\color{codebackground},
+  basicstyle=\texttt\tiny,
+  belowcaptionskip=-8pt,
+  breaklines=true,
+  columns=flexible,
+  commentstyle=\color{teal},
+  escapeinside={(*@}{@*)}, % for escaping
+  firstnumber=1,
+  frame=tb, % hrule above and below
+  gobble=-4,
+  keepspaces=true,
+  keywordstyle=\color{bashred},
+  language=Bash,
+  numbers=left, % {none, left, right}
+  numbersep=5pt,
+  numberstyle=\scriptsize\color{black},
+  showstringspaces=false,
+  stringstyle=\color{bashred},
+  xleftmargin=5.0ex
+}
+
 
 \lstset{literate=%
     {Ö}{{\"O}}1
@@ -368,29 +419,60 @@
 
 \section{Implementierung}
 \begin{frame}[fragile]{Implementierung der Datenbanktabellen}
-  \begin{minipage}[t]{1\textwidth}
-    \begin{quotation}
-      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-    \end{quotation}
+  \begin{lstlisting}[style=sql-style,
+    breaklines=true]
+    CREATE TABLE PAMESAN.dbo.RawData (
+        UUID uniqueidentifier NOT NULL,
+        Site int NOT NULL,
+        [Datetime] datetime NULL,
+        LeftIn nvarchar(50) COLLATE Latin1_General_CI_AS NULL, <@\\\large\vdots \setcounter{lstnumber}{13}@>
+        [Image] varbinary(MAX) NULL,
+        CONSTRAINT PK_RawData PRIMARY KEY (UUID),
+        CONSTRAINT RawData_FK FOREIGN KEY (Site) REFERENCES PAMESAN.dbo.SiteSpecificValues(Id)
+    );
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung des Datenspeicherservice}
+  \textbf{Verwendete Pakete}
+  \begin{itemize}
+    \item C\#
+    \item FAIP.LIB.RMQ
+    \item Microsoft Entity Framework Core (Database first)
+    \item NLog
+  \end{itemize}
+
+  \pause
+
+  \begin{lstlisting}[style=bash-style,
+    breaklines=true]
+    Scaffold-DbContext "Data Source=sql-mar-01.druckhaus.local; Initial Catalog=PAMESAN; persist security info=True; user id=pamesan-rw; password=******" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DatabaseContext -Tables RawData, ProcessedData
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Lasersensor und Arduino}
+  \begin{minipage}[t]{0.49\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=1\textwidth]{pics/thingiverse_3D.png}
+    \end{figure}
+  \end{minipage}
+  \begin{minipage}[t]{0.49\textwidth}
+    \begin{figure}
+      \centering
+      \includegraphics[width=1\textwidth]{pics/Arduino.jpeg}
+    \end{figure}
   \end{minipage}
 \end{frame}
 
 
 \begin{frame}[fragile]{Umsetzung des Sensorträgers}
-  \begin{minipage}[t]{1\textwidth}
-    \begin{quotation}
-      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-    \end{quotation}
-  \end{minipage}
-\end{frame}
-
-
-\begin{frame}[fragile]{Implementierung des Datenspeicherservice}
-  \begin{minipage}[t]{1\textwidth}
-    \begin{quotation}
-      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-    \end{quotation}
-  \end{minipage}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.45\textwidth]{pics/Sensortraeger_cropped.jpeg}
+  \end{figure}
 \end{frame}
 
 
