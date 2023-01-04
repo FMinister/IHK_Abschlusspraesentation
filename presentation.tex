@@ -172,6 +172,8 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
+
+
 \section{Projektumfeld}
 \begin{frame}[fragile]{FLYERALARM GmbH}
   \centering{\Large{FLYERALARM GmbH}}
@@ -218,6 +220,8 @@
   \end{itemize}
 \end{frame}
 
+
+
 \section{Planung}
 \begin{frame}[fragile]{Zeitschätzung Projektphasen}
   \begin{tikzpicture}
@@ -252,13 +256,17 @@
 \end{frame}
 
 
+
 \section{Analyse}
 \begin{frame}[fragile]{Ist-Analyse}
   \textbf{Ist-Analyse}
   \begin{itemize}
     \item Paketgröße und Anzahl wird manuell gepflegt
+          \pause
     \item Neue Anforderungen durch  Verpackungsgesetz
+          \pause
     \item Hoher Wartungsaufwand für Entwickler
+          \pause
     \item Paketgröße ungenau
   \end{itemize}
 \end{frame}
@@ -268,7 +276,9 @@
   \textbf{Soll-Analyse}
   \begin{itemize}
     \item Paketgröße und Anzahl automatisch erfassen
+          \pause
     \item Erfüllung der Anforderungen durch Verpackungsgesetz
+          \pause
     \item Wartungsaufwand minimieren durch automatische Erfassung
   \end{itemize}
 \end{frame}
@@ -286,17 +296,17 @@
   \begin{table}[htbp]
     \centering
     \begin{tabular}{lr}
-      Hardware                    & Gesamt         \\
-      ARCELI Shield Board Kit     & \SI{17.99}{€}  \\
-      AZDelivery 5 x Mega 2560 R3 & \SI{14.99}{€}  \\
-      Benewake TF MINI PLUS       & \SI{182.40}{€} \\
-      Microsoft Lifecam Studio    & \SI{42.99}{€}  \\
-      item-Systemprofile          & \SI{29.52}{€}  \\
-      item-Verbindungsstücke      & \SI{192.00}{€} \\
-      item-Füße                   & \SI{48.00}{€}  \\
-      Dell Wyse 5070 Thin Client  & \SI{450.00}{€} \\
+      \textbf{Hardware}           & \textbf{Gesamt}         \\ \hline
+      ARCELI Shield Board Kit     & \SI{17.99}{€}           \\
+      AZDelivery 5 x Mega 2560 R3 & \SI{14.99}{€}           \\
+      Benewake TF MINI PLUS       & \SI{182.40}{€}          \\
+      Microsoft Lifecam Studio    & \SI{42.99}{€}           \\
+      item-Systemprofile          & \SI{29.52}{€}           \\
+      item-Verbindungsstücke      & \SI{192.00}{€}          \\
+      item-Füße                   & \SI{48.00}{€}           \\
+      Dell Wyse 5070 Thin Client  & \SI{450.00}{€}          \\
       \hline
-      Gesamtkosten                & \SI{977.89}{€}
+      \textbf{Gesamtkosten}       & \textbf{\SI{977.89}{€}}
     \end{tabular}
   \end{table}
 \end{frame}
@@ -306,12 +316,12 @@
   \begin{table}[htbp]
     \centering
     \begin{tabular}{lrrr}
-      Personal       & Zeit in Stunden & Kosten pro Stunde              & Gesamt          \\
-      Auszubildender & 80              & \SI{6.00}{€} + \SI{15.00}{€}   & \SI{1680.00}{€} \\
-      Teamleitung    & 2               & \SI{31.50}{€}  + \SI{15.00}{€} & \SI{93.00}{€}   \\
-      Teammitglied   & 2               & \SI{21.50}{€}  + \SI{15.00}{€} & \SI{73.00}{€}   \\
-      Haustechnik    & 8               & \SI{19.00}{€}  + \SI{15.00}{€} & \SI{272.00}{€}  \\ \hline
-      Gesamtkosten   &                 &                                & \SI{2118.00}{€}
+      \textbf{Personal}     & \textbf{Zeit in Stunden} & \textbf{Kosten pro Stunde}     & \textbf{Gesamt}          \\ \hline
+      Auszubildender        & 80                       & \SI{6.00}{€} + \SI{15.00}{€}   & \SI{1680.00}{€}          \\
+      Teamleitung           & 2                        & \SI{31.50}{€}  + \SI{15.00}{€} & \SI{93.00}{€}            \\
+      Teammitglied          & 2                        & \SI{21.50}{€}  + \SI{15.00}{€} & \SI{73.00}{€}            \\
+      Haustechnik           & 8                        & \SI{19.00}{€}  + \SI{15.00}{€} & \SI{272.00}{€}           \\ \hline
+      \textbf{Gesamtkosten} &                          &                                & \textbf{\SI{2118.00}{€}}
     \end{tabular}
   \end{table}
 
@@ -323,7 +333,41 @@
 
 
 \section{Entwurf}
-\begin{frame}[fragile]{Entwurf}
+\begin{frame}[fragile]{Sensorträger}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{files/Sensortraeger/Skizze_Sensor_Traeger_3D_verdreht_cropped.png}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{Standort}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1\textwidth]{pics/Versandanlage.png}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{Programmübersicht}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.75\textwidth]{pics/Architektur.png}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]{Datenmodell}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=0.4\textwidth]{pics/Tabellenmodell.png}
+  \end{figure}
+\end{frame}
+
+
+
+\section{Implementierung}
+\begin{frame}[fragile]{Implementierung der Datenbanktabellen}
   \begin{minipage}[t]{1\textwidth}
     \begin{quotation}
       Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
@@ -331,14 +375,43 @@
   \end{minipage}
 \end{frame}
 
-\section{Implementierung}
-\begin{frame}[fragile]{Implementierung}
+
+\begin{frame}[fragile]{Umsetzung des Sensorträgers}
   \begin{minipage}[t]{1\textwidth}
     \begin{quotation}
       Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
     \end{quotation}
   \end{minipage}
 \end{frame}
+
+
+\begin{frame}[fragile]{Implementierung des Datenspeicherservice}
+  \begin{minipage}[t]{1\textwidth}
+    \begin{quotation}
+      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
+    \end{quotation}
+  \end{minipage}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung der Sensor-Abfrage}
+  \begin{minipage}[t]{1\textwidth}
+    \begin{quotation}
+      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
+    \end{quotation}
+  \end{minipage}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung des Datenverarbeitungsservice}
+  \begin{minipage}[t]{1\textwidth}
+    \begin{quotation}
+      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
+    \end{quotation}
+  \end{minipage}
+\end{frame}
+
+
 
 \section{Fazit}
 \begin{frame}[fragile]{Fazit}
