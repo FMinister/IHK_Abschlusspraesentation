@@ -412,48 +412,13 @@
 \begin{frame}[fragile]{Datenmodell}
   \begin{figure}[htpb]
     \centering
-    \includegraphics[width=0.4\textwidth]{pics/Tabellenmodell.png}
+    \includegraphics[width=1\textwidth]{pics/Tabellenmodell_schoen.png}
   \end{figure}
 \end{frame}
 
 
 
 \section{Implementierung}
-\begin{frame}[fragile]{Implementierung der Datenbanktabellen}
-  \begin{lstlisting}[style=sql-style,
-    breaklines=true]
-    CREATE TABLE PAMESAN.dbo.RawData (
-        UUID uniqueidentifier NOT NULL,
-        Site int NOT NULL,
-        [Datetime] datetime NULL,
-        LeftIn nvarchar(50) COLLATE Latin1_General_CI_AS NULL, <@\\\large\vdots \setcounter{lstnumber}{13}@>
-        [Image] varbinary(MAX) NULL,
-        CONSTRAINT PK_RawData PRIMARY KEY (UUID),
-        CONSTRAINT RawData_FK FOREIGN KEY (Site) REFERENCES PAMESAN.dbo.SiteSpecificValues(Id)
-    );
-\end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[fragile]{Implementierung des Datenspeicherservice}
-  \textbf{Verwendete Pakete}
-  \begin{itemize}
-    \item C\#
-    \item FAIP.LIB.RMQ
-    \item Microsoft Entity Framework Core (Database first)
-    \item NLog
-    \item Docker
-  \end{itemize}
-
-  \pause
-
-  \begin{lstlisting}[style=bash-style,
-    breaklines=true]
-    Scaffold-DbContext "Data Source=sql-mar-01.druckhaus.local; Initial Catalog=PAMESAN; persist security info=True; user id=pamesan-rw; password=******" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DatabaseContext -Tables RawData, ProcessedData
-\end{lstlisting}
-\end{frame}
-
-
 \begin{frame}[fragile]{Lasersensor und Arduino}
   \begin{minipage}[t]{0.49\textwidth}
     \begin{figure}
@@ -478,33 +443,33 @@
 \end{frame}
 
 
-\begin{frame}[fragile]{Implementierung der Sensor-Abfrage}
-  \begin{lstlisting}[style=sql-style,
-    breaklines=true, firstnumber=44]
-  void loop() {<@\\\large\vdots \setcounter{lstnumber}{58}@>
-    while(!receiveComplete1) {
-      getTFminiData(&portOne, &distance1, &strength1, &receiveComplete1);
-      if(receiveComplete1) {
-        Serial.print("dist_1=");
-        Serial.print(distance1);
-        Serial.print(";");
-      }
-    }
-    receiveComplete1 = false;<@\\\large\vdots \setcounter{lstnumber}{89}@>
-  }
-\end{lstlisting}
-\end{frame}
+% \begin{frame}[fragile]{Implementierung der Sensor-Abfrage}
+%   \begin{lstlisting}[style=sql-style,
+%     breaklines=true, firstnumber=44]
+%   void loop() {<@\\\large\vdots \setcounter{lstnumber}{58}@>
+%     while(!receiveComplete1) {
+%       getTFminiData(&portOne, &distance1, &strength1, &receiveComplete1);
+%       if(receiveComplete1) {
+%         Serial.print("dist_1=");
+%         Serial.print(distance1);
+%         Serial.print(";");
+%       }
+%     }
+%     receiveComplete1 = false;<@\\\large\vdots \setcounter{lstnumber}{89}@>
+%   }
+% \end{lstlisting}
+% \end{frame}
 
 
-\begin{frame}[fragile]{Implementierung des Ausleseservice}
-  \textbf{Verwendete Pakete}
-  \begin{itemize}
-    \item Python
-    \item OpenCV
-    \item pyserial
-    \item pika
-  \end{itemize}
-\end{frame}
+% \begin{frame}[fragile]{Implementierung des Ausleseservice}
+%   \textbf{Verwendete Pakete}
+%   \begin{itemize}
+%     \item Python
+%     \item OpenCV
+%     \item pyserial
+%     \item pika
+%   \end{itemize}
+% \end{frame}
 
 
 \begin{frame}[fragile]{Implementierung des Ausleseservice}
@@ -512,70 +477,72 @@
 \end{frame}
 
 
-\begin{frame}[fragile]{Implementierung des Datenverarbeitungsservice}
+\begin{frame}[fragile]{Implementierung des Ausleseservice -- Pika}
+  \textbf{HIER RMQ-KLASSE/FUNKTION ZEIGEN}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung der Datenbanktabellen}
+  \begin{lstlisting}[style=sql-style,
+    breaklines=true]
+    CREATE TABLE PAMESAN.dbo.RawData (
+        UUID uniqueidentifier NOT NULL,
+        Site int NOT NULL,
+        [Datetime] datetime NULL,
+        LeftIn nvarchar(50) COLLATE Latin1_General_CI_AS NULL, <@\\\large\vdots \setcounter{lstnumber}{13}@>
+        [Image] varbinary(MAX) NULL,
+        CONSTRAINT PK_RawData PRIMARY KEY (UUID),
+        CONSTRAINT RawData_FK FOREIGN KEY (Site) REFERENCES PAMESAN.dbo.SiteSpecificValues(Id)
+    );
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{RabbitMQ}
+  \textbf{RABBITMQ ERKLAEREN}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung des Datenspeicherservice}
   \textbf{Verwendete Pakete}
   \begin{itemize}
-    \item Python
-    \item numpy
-    \item pyzbar
-    \item YOLOv7
-    \item SQLModel
-    \item pika
-    \item labelImg
+    \item C\#
+    \item FAIP.LIB.RMQ
+    \item Microsoft Entity Framework Core (Database first)
+    \item Docker
   \end{itemize}
+
+  \pause
+
+  \begin{lstlisting}[style=bash-style,
+    breaklines=true]
+    Scaffold-DbContext "Data Source=sql-mar-01.druckhaus.local; Initial Catalog=PAMESAN; persist security info=True; user id=pamesan-rw; password=******" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DatabaseContext -Tables RawData, ProcessedData
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung des Datenspeicherservice}
+  \textbf{HIER DATENSPEICHERKLASSE ZEIGEN}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung des Datenverarbeitungsservice}
+  \textbf{HIER ABLAUFDIAGRAMM EINFUEGEN}
 \end{frame}
 
 
 \begin{frame}[fragile]{Labeln der Bilder}
-  \textbf{Verwendete Pakete}
-  \begin{itemize}
-    \item Python
-    \item numpy
-    \item pyzbar
-    \item YOLOv7
-    \item SQLModel
-    \item pika
-  \end{itemize}
+  \textbf{HIER LABELIMG EINFUEGEN}
 \end{frame}
 
 
 \begin{frame}[fragile]{Training des YOLOv7-Models}
-  \textbf{Verwendete Pakete}
-  \begin{itemize}
-    \item Python
-    \item numpy
-    \item OpenCV
-    \item pyzbar
-    \item YOLOv7
-    \item SQLModel
-    \item pika
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}[fragile]{Erkennung der Versandverpackung}
-  \textbf{Verwendete Pakete}
-  \begin{itemize}
-    \item Python
-    \item numpy
-    \item pyzbar
-    \item YOLOv7
-    \item SQLModel
-    \item pika
-  \end{itemize}
+  \textbf{HIER TRAININGSBEFEHL ZEIGEN + BILD WENN FUNKTIONIERT}
 \end{frame}
 
 
 \begin{frame}[fragile]{Auslesen des Versandlabels}
-  \textbf{Verwendete Pakete}
-  \begin{itemize}
-    \item Python
-    \item numpy
-    \item pyzbar
-    \item YOLOv7
-    \item SQLModel
-    \item pika
-  \end{itemize}
+  \textbf{LABELERKENNUNGSCODE ZEIGEN + BILD?}
 \end{frame}
 
 
@@ -654,6 +621,55 @@
     \item Aufbau an anderen Standorten
   \end{itemize}
 \end{frame}
+
+
+
+
+% Show the slide as if horizontal blinds were pulled away.
+% \transblindshorizontal
+
+% Show the slide as if vertical blinds were pulled away.
+% \transblindsvertical
+
+% Show the slide by moving to the center from all four sides.
+% \transboxin
+
+% Show the slide by showing more and more of a rectangular area that is centered on the slide center
+% \transboxout
+
+% Slowly dissolve what was shown before
+% \transdissolve
+
+% Glitter sweeps in specified direction
+% \transglitter
+
+% Show the slide by sweeping two vertical lines from the sides inward.
+% \transsplitverticalin
+
+% Show the slide by sweeping two vertical lines from the center outward.
+% \transsplitverticalout
+
+% Show the slide by sweeping two horizontal lines from the sides inward.
+% \transsplithorizontalin
+
+% Show the slide by sweeping two horizontal lines from the center outward.
+% \transsplithorizontalout
+
+% Sweeps single line in specified direction
+% \transwipe
+
+% Show slide specified number of seconds
+% \transduration{2}
+
+% Show the slide by pushing what was shown before off the screen using the new content.
+% \transpush
+
+% Replace the previous slide directly (default behaviour).
+% \transreplace
+
+% Show the slide by covering the content that was shown before
+% \transcover
+
 
 
 
