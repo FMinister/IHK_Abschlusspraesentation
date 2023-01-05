@@ -30,6 +30,7 @@
 \definecolor{sqlpurple}{RGB}{201, 53, 84}
 \definecolor{bashred}{RGB}{178, 34, 34}
 \definecolor{cicdlila}{RGB}{135, 103, 218}
+\definecolor{darkgreenshade}{RGB}{0, 153, 153}
 
 
 \usepackage{graphicx}
@@ -441,6 +442,7 @@
     \item FAIP.LIB.RMQ
     \item Microsoft Entity Framework Core (Database first)
     \item NLog
+    \item Docker
   \end{itemize}
 
   \pause
@@ -477,32 +479,182 @@
 
 
 \begin{frame}[fragile]{Implementierung der Sensor-Abfrage}
-  \begin{minipage}[t]{1\textwidth}
-    \begin{quotation}
-      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-    \end{quotation}
-  \end{minipage}
+  \begin{lstlisting}[style=sql-style,
+    breaklines=true, firstnumber=44]
+  void loop() {<@\\\large\vdots \setcounter{lstnumber}{58}@>
+    while(!receiveComplete1) {
+      getTFminiData(&portOne, &distance1, &strength1, &receiveComplete1);
+      if(receiveComplete1) {
+        Serial.print("dist_1=");
+        Serial.print(distance1);
+        Serial.print(";");
+      }
+    }
+    receiveComplete1 = false;<@\\\large\vdots \setcounter{lstnumber}{89}@>
+  }
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung des Ausleseservice}
+  \textbf{Verwendete Pakete}
+  \begin{itemize}
+    \item Python
+    \item OpenCV
+    \item pyserial
+    \item pika
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Implementierung des Ausleseservice}
+  \textbf{HIER DIAGRAMM ERSTELLEN UND EINFÜGEN}
 \end{frame}
 
 
 \begin{frame}[fragile]{Implementierung des Datenverarbeitungsservice}
-  \begin{minipage}[t]{1\textwidth}
-    \begin{quotation}
-      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-    \end{quotation}
-  \end{minipage}
+  \textbf{Verwendete Pakete}
+  \begin{itemize}
+    \item Python
+    \item numpy
+    \item pyzbar
+    \item YOLOv7
+    \item SQLModel
+    \item pika
+    \item labelImg
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Labeln der Bilder}
+  \textbf{Verwendete Pakete}
+  \begin{itemize}
+    \item Python
+    \item numpy
+    \item pyzbar
+    \item YOLOv7
+    \item SQLModel
+    \item pika
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Training des YOLOv7-Models}
+  \textbf{Verwendete Pakete}
+  \begin{itemize}
+    \item Python
+    \item numpy
+    \item OpenCV
+    \item pyzbar
+    \item YOLOv7
+    \item SQLModel
+    \item pika
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Erkennung der Versandverpackung}
+  \textbf{Verwendete Pakete}
+  \begin{itemize}
+    \item Python
+    \item numpy
+    \item pyzbar
+    \item YOLOv7
+    \item SQLModel
+    \item pika
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Auslesen des Versandlabels}
+  \textbf{Verwendete Pakete}
+  \begin{itemize}
+    \item Python
+    \item numpy
+    \item pyzbar
+    \item YOLOv7
+    \item SQLModel
+    \item pika
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Berechnung der Paketgröße}
+  \textbf{HIER BERECHNUNG ERSTELLEN UND EINFÜGEN}
 \end{frame}
 
 
 
 \section{Fazit}
-\begin{frame}[fragile]{Fazit}
-  \begin{minipage}[t]{1\textwidth}
-    \begin{quotation}
-      Habt ihr bereits Erfahrungen mit CO$_2$-Sensoren gemacht?
-    \end{quotation}
-  \end{minipage}
+\begin{frame}[fragile]{Soll-/Ist-Vergleich}
+  \begin{tikzpicture}
+
+    \draw (0cm,0cm) -- (9.5cm,0cm);  %Abzisse
+    \draw (0cm,0cm) -- (0cm,-0.1cm);  %linkes Ende der Abzisse
+    \draw (9.5cm,0cm) -- (9.5cm,-0.1cm);  %rechtes Ende der Abzisse
+
+    \draw (-0.1cm,0cm) -- (-0.1cm,5cm);  %Ordinate
+    \draw (-0.1cm,0cm) -- (-0.2cm,0cm);  %unteres Ende der Ordinate
+    \draw (-0.1cm,5cm) -- (-0.2cm,5cm) node [left] {h};  %oberes Ende der Ordinate
+
+    \foreach \x in {10,20,...,40}  %Hilfslinien
+    \draw[gray!50, text=black] (-0.2 cm,\x * 0.1 cm) -- (9.5 cm,\x * 0.1 cm)
+    node at (-0.5 cm,\x * 0.1 cm) {\x};  %Beschriftung der Hilfslinien
+
+    \node at (4.5cm,5.5cm) {Abschließender Zeitablauf};  %Überschrift
+
+    \foreach \x/\y/\country in {0.5/10/Analyse,  %\x ist Anfang der Säulen
+        2/8/Entwurf,  %\y ist Höhe der Säulen
+        3.5/39/Implementierung,
+        5/5/Test,
+        6.5/6/Einführung,
+        8/12/Dokumentation}
+      {
+        \draw[fill=mSybilaRed] (\x cm,0cm) rectangle (0.5cm+\x cm,\y * 0.1 cm) %die Säulen
+        node at (0.2cm + \x cm,\y * 0.1 cm + 0.3cm) {\y}; %die Prozente über den Säulen
+        \node[rotate=45, left] at (0.6 cm +\x cm,-0.1cm) {\country}; %Säulenbeschriftung
+      };
+
+    \foreach \x/\y in {0.9/10,  %\x ist Anfang der Säulen
+        2.4/8,  %\y ist Höhe der Säulen
+        3.9/46,
+        5.4/2,
+        6.9/2,
+        8.4/12}
+      {
+        \draw[fill=darkgreenshade] (\x cm,0cm) rectangle (0.5cm+\x cm,\y * 0.1 cm) %die Säulen
+        node at (0.25cm + \x cm,\y * 0.1 cm + 0.3cm) {\y}; %die Prozente über den Säulen
+      };
+
+    \draw[fill=mSybilaRed] (7cm,4.5cm) rectangle (7.2cm,4.7cm) node at (8cm,4.6cm) {h geplant};
+    \draw[fill=darkgreenshade] (7cm,4cm) rectangle (7.2cm,4.2cm) node at (8.2cm,4.1cm) {h gebraucht};
+
+  \end{tikzpicture}
 \end{frame}
+
+
+\begin{frame}[fragile]{Lessons Learned und Ausblick}
+  \textbf{Lessons Learned}
+  \begin{itemize}
+    \item YOLOv7 als mit geringem Vorwissen leicht einsetzbarer Objektdetektor
+          \pause
+    \item Pufferzeit sollte \SI{2}{\percent} der Gesamtzeit betragen
+          \pause
+    \item Industriekamera $>$ Webcam $\rightarrow$ KEYENCE-Scanner
+  \end{itemize}
+
+  \pause
+
+  \textbf{Ausblick}
+  \begin{itemize}
+    \item Verwendung KEYENCE-Scanner und Umschreiben auf C\#
+          \pause
+    \item Verknüpfung erfasster Abmessungen mit bekannten Kartonagen
+          \pause
+    \item Aufbau an anderen Standorten
+  \end{itemize}
+\end{frame}
+
 
 
 % \begin{frame}
