@@ -51,7 +51,7 @@
   breaklines=true,
   columns=flexible,
   basicstyle=\tt\scriptsize,
-  escapeinside={(*@}{@*)}, 
+  escapeinside={<@}{@>} 
   backgroundcolor=\color{codebackground},
   showstringspaces=false,% for escapin
   language=[LaTeX]TeX,
@@ -61,25 +61,33 @@
   commentstyle=\color{teal},
   gobble=4
 }
+
+
+\lstloadlanguages{Python}
 \lstdefinestyle{MyPythonStyle}{
-  frame=tb, % hrule above and below
-  keepspaces=true,
+  backgroundcolor=\color{codebackground},
+  basicstyle=\ttfamily,
   breaklines=true,
   columns=flexible,
-  basicstyle=\tt\scriptsize,
-  escapeinside={(*@}{@*)}, % for escaping
-  backgroundcolor=\color{codebackground},
-  showstringspaces=false,
-  language=Python,
-  keywordstyle=\color{blue},
-  stringstyle=\color{red},
   commentstyle=\color{teal},
-  numbers=left, % {none, left, right}
+  escapeinside={<@}{@>}, % for escaping
   firstnumber=1,
-  numberstyle=\scriptsize\color{black},
+  flexiblecolumns,
+  frame=tb, % hrule above and below
+  gobble=-4,
+  keepspaces=true,
+  keywordstyle={\color{mSybilaRed}},
+  keywordstyle=[1]{\color{mSybilaRed}},
+  keywordstyle=[2]{\color{darkgreenshade}},
+  language=Python,
+  morekeywords=[1]{True, as},
+  morekeywords=[2]{Queue, EnvConfig, initialize_env, Publisher, connect, get_site_id, empty, get, data_hydration, publish, sleep, Exception},
+  numbers=left, % {none, left, right}
   numbersep=5pt,
-  xleftmargin=5.0ex,
-  gobble=4
+  numberstyle=\scriptsize\color{black},
+  showstringspaces=false,
+  stringstyle=\color{darkgreenshade},
+  xleftmargin=5.0ex
 }
 
 \lstloadlanguages{SQL}
@@ -114,7 +122,7 @@
   breaklines=true,
   columns=flexible,
   commentstyle=\color{teal},
-  escapeinside={(*@}{@*)}, % for escaping
+  escapeinside={<@}{@>} % for escaping
   firstnumber=1,
   frame=tb, % hrule above and below
   gobble=-4,
@@ -481,7 +489,37 @@
 
 
 \begin{frame}[fragile]{Implementierung des Ausleseservice -- Pika}
-  \textbf{HIER RMQ-KLASSE/FUNKTION ZEIGEN}
+  \begin{lstlisting}[style=MyPythonStyle,
+    breaklines=true, firstnumber=75]
+def rmq_sender(queue: Queue):
+  config_reader = EnvConfig()
+  config_reader.initialize_env()
+  pub = Publisher(config_reader)
+  pub.connect()
+  site_id = config_reader.get_site_id()
+  while True:
+      try:
+          if not queue.empty():
+              data = queue.get()
+              hyd_data = data_hydration(data, site_id)
+              pub.publish(hyd_data)
+
+          time.sleep(0.5)
+      except Exception as ex: <@\\\large\vdots@>
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{RabbitMQ}
+  \alt<2>{
+    \begin{figure}[htpb]
+      \centering
+      \includegraphics[width=0.75\textwidth]{pics/Architektur.png}
+    \end{figure}}
+  {\begin{figure}[htpb]
+      \centering
+      \includegraphics[width=1\textwidth]{pics/rabbitmq-broker.jpg}
+    \end{figure}}
 \end{frame}
 
 
@@ -498,11 +536,6 @@
         CONSTRAINT RawData_FK FOREIGN KEY (Site) REFERENCES PAMESAN.dbo.SiteSpecificValues(Id)
     );
 \end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[fragile]{RabbitMQ}
-  \textbf{RABBITMQ ERKLAEREN}
 \end{frame}
 
 
