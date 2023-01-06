@@ -31,6 +31,8 @@
 \definecolor{bashred}{RGB}{178, 34, 34}
 \definecolor{cicdlila}{RGB}{135, 103, 218}
 \definecolor{darkgreenshade}{RGB}{0, 153, 153}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
 
 
 \usepackage{graphicx}
@@ -43,6 +45,7 @@
 
 \usepackage{tikz}
 \definecolor{myblue}{HTML}{92dcec}
+\usepackage{smartdiagram}
 
 \usepackage{listings}
 \lstdefinestyle{MyLatexStyle} {
@@ -90,6 +93,31 @@
   xleftmargin=5.0ex
 }
 
+\lstloadlanguages{[Sharp]C}
+\lstdefinestyle{cSharpStyle}{
+  backgroundcolor=\color{codebackground},
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=flexible,
+  commentstyle=\color{greencomments},
+  escapeinside={<@}{@>}, % for escaping
+  firstnumber=1,
+  flexiblecolumns,
+  frame=tb, % hrule above and below
+  gobble=-4,
+  keepspaces=true,
+  keywordstyle={\color{bluekeywords}},
+  keywordstyle=[2]{\color{mSybilaRed}},
+  language=[Sharp]C,
+  morekeywords=[2]{PAMESANContext, RawData},
+  numbers=left, % {none, left, right}
+  numbersep=5pt,
+  numberstyle=\scriptsize\color{black},
+  showstringspaces=false,
+  stringstyle=\color{mSybilaRed},
+  xleftmargin=5.0ex
+}
+
 \lstloadlanguages{SQL}
 \lstdefinestyle{sql-style}{
   backgroundcolor=\color{codebackground},
@@ -122,7 +150,7 @@
   breaklines=true,
   columns=flexible,
   commentstyle=\color{teal},
-  escapeinside={<@}{@>} % for escaping
+  escapeinside={<@}{@>}, % for escaping
   firstnumber=1,
   frame=tb, % hrule above and below
   gobble=-4,
@@ -451,35 +479,6 @@
 \end{frame}
 
 
-% \begin{frame}[fragile]{Implementierung der Sensor-Abfrage}
-%   \begin{lstlisting}[style=sql-style,
-%     breaklines=true, firstnumber=44]
-%   void loop() {<@\\\large\vdots \setcounter{lstnumber}{58}@>
-%     while(!receiveComplete1) {
-%       getTFminiData(&portOne, &distance1, &strength1, &receiveComplete1);
-%       if(receiveComplete1) {
-%         Serial.print("dist_1=");
-%         Serial.print(distance1);
-%         Serial.print(";");
-%       }
-%     }
-%     receiveComplete1 = false;<@\\\large\vdots \setcounter{lstnumber}{89}@>
-%   }
-% \end{lstlisting}
-% \end{frame}
-
-
-% \begin{frame}[fragile]{Implementierung des Ausleseservice}
-%   \textbf{Verwendete Pakete}
-%   \begin{itemize}
-%     \item Python
-%     \item OpenCV
-%     \item pyserial
-%     \item pika
-%   \end{itemize}
-% \end{frame}
-
-
 \begin{frame}[fragile]{Implementierung des Ausleseservice}
   \begin{figure}[htpb]
     \centering
@@ -540,13 +539,13 @@ def rmq_sender(queue: Queue):
 
 
 \begin{frame}[fragile]{Implementierung des Datenspeicherservice}
-  \textbf{Verwendete Pakete}
-  \begin{itemize}
-    \item C\#
-    \item FAIP.LIB.RMQ
-    \item Microsoft Entity Framework Core (Database first)
-    \item Docker
-  \end{itemize}
+  \smartdiagramset{
+    uniform color list=white for 4 items,
+    uniform arrow color=true,
+    arrow color=gray!50!black,
+    back arrow disabled=true}
+  \smartdiagram[flow diagram:horizontal]{Commit auf main-branch,
+    GitLab Pipeline, Docker Image, Docker Swarm}
 
   \pause
 
@@ -558,7 +557,20 @@ def rmq_sender(queue: Queue):
 
 
 \begin{frame}[fragile]{Implementierung des Datenspeicherservice}
-  \textbf{HIER DATENSPEICHERKLASSE ZEIGEN}
+  \begin{lstlisting}[style=cSharpStyle,
+    breaklines=true, firstnumber=38]
+internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
+  try {
+    RawData rawData = JsonConvert.DeserializeObject<RawData>(data)!;
+
+    dbContext.RawData.Add(rawData);
+    dbContext.SaveChanges();
+  }
+  catch {
+      throw;
+  }
+}
+\end{lstlisting}
 \end{frame}
 
 
@@ -568,7 +580,10 @@ def rmq_sender(queue: Queue):
 
 
 \begin{frame}[fragile]{Labeln der Bilder}
-  \textbf{HIER LABELIMG EINFUEGEN}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1\textwidth]{pics/labelImg.png}
+  \end{figure}
 \end{frame}
 
 
