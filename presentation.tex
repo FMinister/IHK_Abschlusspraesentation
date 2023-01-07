@@ -46,6 +46,8 @@
 \usepackage{tikz}
 \definecolor{myblue}{HTML}{92dcec}
 \usepackage{smartdiagram}
+\usesmartdiagramlibrary{additions} % required in the preamble
+\usetikzlibrary{arrows} % required in the preamble
 
 \usepackage{listings}
 \lstdefinestyle{MyLatexStyle} {
@@ -575,7 +577,35 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
 
 
 \begin{frame}[fragile]{Implementierung des Datenverarbeitungsservice}
-  \textbf{HIER ABLAUFDIAGRAMM EINFUEGEN}
+  \vspace{0.7cm}
+  \begin{minipage}[c][8cm]{\textwidth}
+    \centering
+    \smartdiagramset{
+      uniform color list=white for 5 items,
+      circular final arrow disabled=true,
+      circular distance=2.25cm,
+      arrow tip=to,
+      arrow line width=2pt,
+      uniform arrow color=true,
+      arrow color=gray!50!black,
+      additions={
+          additional item bottom color=white,
+          additional item border color=gray,
+          additional item shadow=drop shadow,
+          additional item offset=0.65cm,
+          additional arrow line width=2pt,
+          additional arrow tip=to,
+          additional arrow color=gray!50!black,
+        }
+    }
+    \smartdiagramadd[circular diagram]{
+      Paketerkennung,Zuschnitt,Labelerkennung,Barcode auslesen,Paketgröße berechnen
+    }{
+      above of module1/RMQ-Subscriber,right of module5/RMQ-Publisher
+    }
+    \smartdiagramconnect{to-}{module1/additional-module1}
+    \smartdiagramconnect{-to}{module5/additional-module2}
+  \end{minipage}
 \end{frame}
 
 
@@ -588,12 +618,26 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
 
 
 \begin{frame}[fragile]{Training des YOLOv7-Models}
-  \textbf{HIER TRAININGSBEFEHL ZEIGEN + BILD WENN FUNKTIONIERT}
+  \begin{lstlisting}[style=bash-style,
+    breaklines=true]
+    python train.py --device 0 --batch-size 16 --epochs 100 --img 640 640 --data data/custom_data.yaml --hyp data/hyp.scratch.custom.yaml --cfg cfg/training/yolov7_custom.yaml --weights yolov7.pt --name yolo7-custom
+  \end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]{Ergebnis des YOLOv7-Models}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[angle=90,origin=c,width=1\textwidth]{pics/detectShippingBox.jpg}
+  \end{figure}
 \end{frame}
 
 
 \begin{frame}[fragile]{Auslesen des Versandlabels}
-  \textbf{LABELERKENNUNGSCODE ZEIGEN + BILD?}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1\textwidth]{pics/barcode.png}
+  \end{figure}
 \end{frame}
 
 
