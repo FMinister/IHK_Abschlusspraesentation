@@ -1,0 +1,120 @@
+Guten Morgen!
+Mein Name ist Johannes Leyrer und ich moechte Ihnen heute mein Abschlussprojekt vorstellen.
+Es handelt sich um die Implementierung eines neuen Systems zur Erfassung von Versandverpackungen mit Hilfe von Bild- und Sensordaten zur Erfuellung der Novelle des Verpackungsgesetzes oder besser der Arbeitstitel: Entwicklung von PaMesAn, wobei PaMesAn fuer Paket-Messungs-Anlage steht.
+
+
+Ich habe meine Praesentation wie folgt gegliedert. 
+Zu erst moechte ich kurz das Projektumfeld vorstellen.
+Danach stelle ich meine Planugsphase gefolgt von der Analysephase vor.
+Nach dem Entwurf zeige ich, wie ich das Projekt umgesetzt habe und gebe schlussendlich ein Fazit ab sowie einen Ausblick.
+
+Kurz zu den beiden wichtigen Unternehmen im Projekt:
+Die FLYERALARM GmbH wurde 2002 gegruendet, hat inzwischen mehr als 2000 Mitarbeiter und bietet ueber 3 Millionen Produkte an.
+Damit ist sie eines der groessten E-Commerce Unternehmen Deutschlands sowie die fuehrende Online-Druecker Europas im Business-2-Business-Bereich.
+FLYERALARM betreibt einen eigenen Onlineshop und erstellt die Druckdaten fuer die entsprechenden Produkte.
+
+Die FLYERALARM Industrial Print GmbH (FAIP) hat an 8 Standorten etwa 1200 Mitarbeiter.
+Sie ist eine Tochtergesellschaft der FLYERALARM GmbH
+Sie hat eine eigene IT-Abteilung, in der ich meine Ausbildung genossen habe.
+Die FLYERALARM Industrial Print GmbH ist fuer die Produktion und des Versand der bestellten Produkte verantwortlich.
+
+Zur Planungsphase des Projekts
+Meine anfaengliche Zeitplanung sah wie folgt aus:
+10h fuer die Analyse, 8h fuer den Entwurf eines Loesungsansatzes und 39h fuer die Implementierung dieser Loesung.
+Fuer den abschliessenden Test und die Einfuehrung waren 5h und 6 Stunden geplant, die Dokumentation sollte in 12h abgeschlossen sein. 
+
+Zu erst die Ist-Analyse
+Bisher wurde die Paketgroesse und Anzahl manuell gepflegt
+Die neuen Anforderungen durch das Verpackungsgesetz wurden noch nicht umgesetzt. Das Verpackungsgesetz verpflichtet jedes Unternehmen, das gewerbsmaessig Verkaufsverpackungen oder Umverpackungen erstmals in Deutschland in den Verkehr bringt, sich lizenzieren zu lassen sowie aufgeschluesselt nach Materialarten Verpackungen und Verpackungsmengen zu melden.
+Bisher kostete die manuelle Pflege viel Zeit
+Und die berechneten Paketgroessen stimmten nicht immer mit den eigentlichen Verpackungen ueber ein.
+
+Was soll das Projekt nun umsetzen?
+Erst einmal soll die Paketgroesse und Anzahl automatisch erfasst werden
+Dadurch sollen die Anforderungen durch das Verpackungsgesetz erfuellt werden
+Der Wartungsaufwand soll durch die automatische Erfassung minimiert werden
+
+Mit diesen Anforderungen wurden Anfragen an verschiedene Firmen gestellt, wobei nur die Loether GmbH ein Angebot gesendet hat. Hier sieht man aufgeschluesselt auf 4 Standorte deren erwartete Kosten. Fuer den Standort Kesselsdorf, an dem ich meine Ausbildung absolviere, hat die Firma Loether etwa 35 tausend Euro geschaetzt. 
+
+Ich habe nun die Hardware- und Personalkosten berechnet, die eine Eigenentwicklung und Umsetzung kosten wuerde. Dabei wuerde die Hardware 977,89 Euro kosten.
+Die Personalkosten laufen auf 2118,00 Euro, was in Summe 3095,89 Euro ergibt. Das sind also gut 30 tausend Euro weniger als beim Angebot der Firma Loether, weswegen sich fuer eine Eigenentwicklung entschieden wurde.
+
+Wie folgt habe ich mir dann die Umsetzung des Projekts gedacht
+Zu aller erst die der Sensortraeger. Hier zu sehen als 3D-Modell. Der Sensortraeger selbst ist mit item-Profilen zusammengebaut. Das Foerderband ist hier in der Mitte angedeutet. Die Laser-Sensoren sind jeweils an den Seiten versetzt und am Mittelsteg angebracht. Die Kamera ist neben dem oben angebrachten Sensor montiert. Die kleinen schwarzen Platten dienen als feste Abstaende fuer die Lasersensoren, um Stoerungen zu vermeiden.
+
+Der Standort des Sensortraegers war relativ schnell geklaert. Hier sehen zu sehen ist ein Teil der Versandanlage. Die Pakete kommen von den Verpackungsstationen zum Versandlabel-Stempel. Dort wird das Versandlabel ausgedruckt und aufgedruckt. Nach kurzer Foerderstrecke kommen diese zu den Verteilerbahnen. Zwischen diesen beiden Stationen muss der Sensortraeger aufgebaut werden. Da sich nach dem Versandlabelstempel noch eine Durchgangsbruecke befindet, konnte der Sensortraeger nur im hier gruen markierten Bereich aufgebaut werden.
+
+Die Umsetzung des Projekts wurde mit einer Microservice-Architektur umgesetzt. Damit die verschiedenen Services kommunizieren koennen, wurde RabbitMQ eingesetzt, das ich hier ganz kurz erklaeren moechte. 
+RabbitMQ kann man sich grundsaetzlich wie ein Postsystem vorstellen.
+Hier zu sehen ist der typische Datenfluss zwischen zwei Services. Der Publisher moechte einen Nachricht versenden. Dazu publisht er diese Nachricht an den entsprechenden Exchange und bekommt eine Bestaetigung ueber den Erhalt, so als wuerde man ein Paket beim Paketshop abgeben und einen entsprechenden Beleg bekommen. Der Exchange ermittelt anhand der Nachricht den bzw. die Empfaenger und routet die Nachricht in die Queue. Wie also ein Verteilzentrum, das die Pakete sortiert und an die entsprechende Adresse liefert. Der Consumer, also der Empfaenger fragt diese Queue regelmaessig ab, schaut also regelmaessig in seinen Briefkasten. Nimmt er eine Nachricht aus der Queue, bestaetigt er den Erhalt der Nachricht.
+
+Auf dieser Grundlage wurde die Architektur aufgebaut. Hier zu sehen die die 4 Services und die beiden Queues. Der Datenlese-Service verarbeitet die Daten des Sensortraegers und sendet diese an die pamesan-raw-Exchange. Sowohl der Datenspeicherservice als auch der Datenprozess-Service haben eine eigene Queue in diesem Exchange. Der Datenspeicherservice speichert die Rohdaten ab. Der Datenverabeitungsservice erkennt das Paket, liest das Versandlabel aus und vermisst das Paket. Diese Daten werden an die Pamesan-Processed-Exchange gepublished, welcher die Daten an den Datenspeicher-Service weiterleitet. Diese speichert die erfassten und ermittelten Daten ab.
+
+Die eben angesprochenen Datenspeicherservices speichern die Daten in eine MSSQL-Datenbank. Fuer diese wurde dieses Tabellenmodell angefertigt. Zur sehen sind hier die beiden Tabellen, in denen die aufgenommenen Daten gespeichert werden und die SiteSpecificValues-Tabelle, in der fuer die verschiedenen Standorte wichtige Daten gespeichert werden wie beispielsweise SensorSpacing, also wie weit die beiden seitlichen Sensoren voneinander versetzt angebracht sind. Dies ist fuer die Berechnung der Laenge wichtig, darauf komme ich in einer spaeteren Folie nochmal.
+
+Das Projekt wurde geplant und es folgt die Umsetzung.
+Zu naechst wurde die Halterung fuer die Lasersensoren 3D-gedruckt und der Arduino fuer das Auslesen der Lasersensoren vorbereitet. Dafuer wurde das vom Hersteller der Lasersensoren bereitgestellte Auslese-Script fuer drei Sensoren angepasst und der Arduino mit einem Shield versehen, so dass die Verkabelung sicherer und besser umgesetzt werden konnte. Der Arduino liest die Daten der Lasersensoren aus, berechnet die erfasste Entfernung und gibt diese ueber die serielle Schnittstelle frei. 
+
+Die Haustechniker haben mir dann den Sensortraeger gebaut, hier zu sehen. Hier ist einer der Lasersensoren und die Webcam zu sehen. Anders als auf der urspruenglich geplanten Zeichnung musste die Webcam weiter nach oben und hinten versetzt werden, um ein besseres Bild von den Paketen zu bekommen. Der Arduino und der ThinClient sind hinter dem Foerderband versteckt angebracht, da sich hier Strom und Netzwerkkabel befinden.
+
+Die Implementierung des Auslese-Services erfolgte mit Python. Hier habe ich auf die Multi-Processing-Bibliothek gesetzt, um das stetige Auslesen der seriellen Verbindung nicht durch die Aufnahme des Bildes oder das Versenden der Daten zu stoeren. Multi-Processing anstatt Multithreading aufgrund des Python eigenen GIL, als Global Interpreter Locks. 
+Zu sehen ist hier der Ausleseservice, der nach der Initialisierung in 4 Prozesse aufgeteilt ist. 
+Bei Initialisierung werden die Umgebungsvariablen ausgelesen, beispielsweise der Serielle-Port, an dem der Arduino angeschlossen ist, aber auch die Schwellwerte, ab wann eine Paketerfassung beginnen soll. Danach wird die serielle Schnittstelle initialisiert.
+Der erste Prozess, liest konstant die serielle Schnittstelle aus, also die Abstandswerte, die der Arduino berechnet hat. Diese Werte werden in die Data-Queue geschrieben. 
+Der naechste Prozess liest die Daten aus der Data-Queue und evaluiert diese. Unterschreitet einer der ausgelesenen Werte einen Schwellwert, wird ein FrameRequest in die Evaluated-Data-Queue geschrieben und die Daten solange zu einer Liste hinzugefuegt, bis der Schwellwert wieder ueberschritten ist. Diese Liste wird danach auch in die Evaluated-Data-Queue geschrieben.
+Im Bildaufnahme-Prozess wird das Kamera-Bild aufgenommen. Kommt ein FrameRequest ueber die Queue rein, wird dieses Bild zwischengespeichert. Kommmt danach eine Liste mit Daten ueber die Queue zum Prozess, wird diese Liste mit dem zwischengespeicherten Bild angereichert und in die RMQ-Queue geschrieben.
+Der RMQ-Publisher-Prozess kuemmert sich um das Versenden der ausgelesenen Daten. Hier werden die Abstandswerte, das Bild und die Standortdaten an RabbitMQ uebergeben. 
+
+Einen Code-Ausschnitt dieses letzten Prozess habe ich hier als Beispiel dargestellt. Die Funktion rmq_sender bekommt bei der Initialisierung des Prozesses Zugriff auf die RMQ-Queue. Nachdem die Verbindungsdaten ueber die Umgebungsvariablen ausgelesen werden, wird eine Verbindung zum RabbitMQ-Exchange aufgebaut, dafuer wurde die Programmbibliothek Pika verwendet. Auch wird die Standortspezifische ID aus den Umgebungsvariablen gelesen. Danach wird alle 500 Millisekunden die Queue abgefragt. Ist die Queue nicht leer, werden die Daten ausgelesen, mit der Standortspezifischen ID angereichert und dann an den RabbitMQ-Exchange versendet.
+
+Damit die Daten abgespeichert werden koennen, mussten die vorhin gezeigten Tabellen erzeugt werden. Das habe ich mit SQL umgesetzt. Hier zu sehen ist ein Auszug der Erstellung der RawData-Tabelle. 
+
+Der Datenspeicherservice wurde mit C# umgesetzt. Die Tabellen und die Datenbankverbindung wurden mit EntityFrameworkCore im Database-First-Ansatz implementiert. Der entsprechende Befehl ist hier zu sehen. Je nachdem, welche Umgebungsvariablen der Service besitzt, ist er fuer RawData oder ProcessedData zustaendig. Im Programm selbst wird dies ueber eine switch-case-Anwendung bestimmt.
+Die Services laufen auf dem Docker-Swarm. Der Deploy-Prozess ist hier zu sehen. Geschieht ein Commit auf den main-branch wird eine GitLab-Pipeline ausgeloest. Diese baut das DockerImage und es wird automatisch im DockerSwarm verteilt. Durch verschiedene docker-composes werden verschiedene Umgebungsvariablen in die Images eingefuegt, wodurch beide Services, also fuer RawData und fuer ProcessedData gebaut und deployed werden.
+
+Den Code fuer das Speichern der empfangenen Daten habe ich hier fuer RawData als Beispiel aufgezeigt:
+Ddie Datenbankverbindung wird der Methode ueber Dependency-Injektion uebergeben. Der Datenstring wird auf das RawData-Model deserialisiert. Die Daten werden dann an dem Datenbankkontext uebergeben und abgespeichert. Im Fehlerfall wird die Ausnahmebedingung an die ausfuehrende Methode uebergeben, wo die mittels NLOG geloggt wird.
+
+Der Datenverabeitungsservice ist in Python wie folgt aufgebaut: Der RMQ-Subscriber empfaengt die Daten und gibt diese an die Paketerkennung weiter. Hier wird das Paket mittels des Objektdetektors YOLOv7 erkannt. Urspruenglich sollte die Paketerkennung mit OpenCV geschehen, dies war aber aufgrund der spielgelnden Rollen des Foerderbands nicht moeglich.
+Das Bild wird anhand des erkannten Paketes zugeschnitten und an die Labelerkennung weitergegeben. Nachdem mittels OpenCV das Label erkannt wurde, wird der Barcode ausgelesen. Danch werden die Abmessungen des Pakets berechnet und an den RMQ-Publisher weitergereicht. 
+
+Kurz dazu, was der Objektdetektor YOLOv7 ist und wie dieser trainiert wird.
+YOLOv7 ist ein Fully Convolutional Neural Network. Es ermoeglicht die Erkennung von Objekten wie Menschen, Autos, Katzen und
+vieler weiterer durch Semantische Segmentierung. 
+Durch die Implementierung sogenannter Bag of Freebies, also Methoden, die die Performance eines Modells erhöhen, ohne
+die Trainingszeit zu verlängern, erlaubt YOLOv7 das Trainieren eines eigenen Modells mit einem relativ kleinen Datensatz, in diesem Fall 100 Fotos. Das Trainieren des eigenen Modells wird mit Hilfe von Transfer Learning ermöglicht, wobei ein bereits trainiertes Modell verwendet und mittels eigener Daten angepasst wird. Transfer Learning erlaubt eine schnellere Erstellung, eine gute Modellqualität und weniger Ressourceneinsatz.
+
+Zu erst muessen Bilder gelabelt werden. Hier ein Beispiel, wie ein Foto mittels LabelImage als shipping box gelabelt wird. Diese Arbeit ist recht muehselig, aber dank Bag of Freebies und Transfer Learning musste ich das nur 100 mal machen.
+
+Danach muss der Datensatz in Trainingsdaten und Validierungsdaten aufgeteilt werden. Das heisst, man nimmt 80 Prozent seiner gelabelten Daten und trainiert damit sein Model. In diesem Trainingsbefehl kann man sehen, dass der Datensatz 100 mal durchgegangen wird. 
+Mit den restlichen 20 Prozent der Daten wird das Model geprueft und validiert.  Ist das Ergebnis zufriedenstellend, also groesser 99 Prozent Erkennungsrate, ist das Training abgeschlossen und das Model kann eingesetzt werden.
+
+Der erfolgreiche Einsatz ist hier zu sehen. Das Model ist sich zu 94 Prozent sicher, dass es sich um eine Shipping Box handelt. 
+
+?? (Wenn noch Zeit bleibt, kann ich das im Anschluss live praesentieren.) ??
+
+Der Versandkarton wurde erkannt, nun kann das Bild zugeschnitten werden, wodurch die Spiegelungen auf den Rollen nicht mehr vorhanden sind. Dadurch kann das Versandlabel und vorallem der Barcode mittels openCV gut erfasst werden. Hier das als Beispiel, wie der eben gezeigte Barcode nun mittels OpenCV erkannt wird. Mittels Pyzbar, einem Barcode decoder kann dann der Barcode ausgelesen werden.
+
+Schlussendlich fehlt die Berechnung der Abmessungen der Versandverpackung. 
+Die festen und bekannten Werte wie der Abstand der beiden seitlichen Sensoren oder der Versatz der beiden werden mittels der Bibliothek SQLModel aus der SiteSpecificValues-Tabelle bei Initialisierung ausgelesen.
+Fuer die Berechnung werden folgende Funktionen verwendet:
+calculate_height berechnet die Hoehe des Pakets. Hier wird die Differenz zwischen bekanntem Abstand des Sensor vom Foerderband und dem gemessenen Wert berechnet und somit die Hoehe des Pakets zurueckgegeben.
+calculate_width berechnet die Breite des Pakets anhand des bekanntes Abstands der beiden seitlichen Sensoren. Von diesem werden die beiden seitlich gemessenen Abstandswerte abgezogen.
+calculate_length muss zuerst die Geschwindigkeit des Paketes berechnen. Dafuer wird der bekannte Versatz der beiden seitlichen Sensoren durch die Differenz der beiden Eingangszeitpunkte der beiden Sensoren  geteilt. Mit dieser berechneten Geschwindigkeit die Differenz des Ausgangszeitpunktes und des Eingangszeitpunktes des linken Sensors multipliziert, wodurch man die Laenge erhaelt.
+
+Nun komme ich langsam zum Schluss.
+Hier ist ein Abschließender Zeitablauf. In rot, wie ich es geplant hatte und in tuerkis wie es schlussendlich abgelaufen ist. Anfangs lief noch alles wie geplant, bei der Implementierung hat das Problem der Paketerkennung durch die Spiegelnden Rollen die Zeitplanung leider zunichte gemacht.  Deshalb mussten Test und Einfuehrung zeitlich zurueckgestellt werden. Richtige Tests gab es nur durch Code-Reviews und ein wenig durch die erfolgreiche Einfuehrung.
+Ich persoenlich muss sagen, dass ich sehr froh bin, mit YOLOv7 schon privat gearbeitet zu haben, sonst waere das Projekt wahrscheinlich nicht fertig geworden.
+
+Kurz noch, was ich aus dem Projekt gelernt habe:
+YOLOv7 hat auch mit wenig Vorwissen gut und schnell funktioniert. 
+Beim naechsten Projekt muss ich mehr Pufferzeit einrechnen, damit wichtige Dinge wie Tests nicht wegfallen
+Die Webcam ist nach 5 Tagen ausgestiegen. Wahrscheinlich wegen ueberhitzung. Hier haette man ruhig zu einer teureren Indutriakamera greifen koennen, vorallem mit Blick auf das Vergleichsbudget
+
+Und ein Blick in die Zukunft, bzw. in das hier und jetzt:
+Es wurde entschieden, nun doch einen KEYENCE-Scanner einzusetzen. Der ist mit etwa 2000 Euro zwar nicht guenstig, erleichtert aber den ganzen Prozess deutlich. 
+Ausserdem wird der Datenausleseservice in C# umgeschrieben, um besser in den Techstack des Unternehmens zu passen.
+Die gemessenen Paketabmessungen werden mit bekannten Abmessungen verglichen und koennen so besser gemeldet werden.
+Der Sensortraeger wird an anderen Standorten aufgebaut.
+
+Hier bedanke ich mich fuer Ihre Aufmerksamkeit und freue mich auf Ihre Fragen!

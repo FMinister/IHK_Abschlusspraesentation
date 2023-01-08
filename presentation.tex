@@ -240,7 +240,7 @@
   \leavevmode
   \hbox{
   \begin{beamercolorbox}[wd=.15\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
-    \usebeamerfont{author in head/foot}\insertshortauthor
+    \usebeamerfont{author in head/foot}{Leyrer - 468322}
   \end{beamercolorbox}
 
   \begin{beamercolorbox}[wd=.7\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}
@@ -440,15 +440,10 @@
 
 
 \begin{frame}[fragile]{RabbitMQ}
-  \alt<2>{
-    \begin{figure}[htpb]
-      \centering
-      \includegraphics[width=0.75\textwidth]{pics/Architektur.png}
-    \end{figure}}
-  {\begin{figure}[htpb]
-      \centering
-      \includegraphics[width=1\textwidth]{pics/rabbitmq-broker.jpg}
-    \end{figure}}
+  \begin{figure}[htpb]
+    \centering
+    \includegraphics[width=1\textwidth]{pics/rabbitmq-broker.jpg}
+  \end{figure}
 \end{frame}
 
 
@@ -541,6 +536,13 @@ def rmq_sender(queue: Queue):
 
 
 \begin{frame}[fragile]{Implementierung des Datenspeicherservice}
+  \begin{lstlisting}[style=bash-style,
+    breaklines=true]
+    Scaffold-DbContext "Data Source=sql-mar-01.druckhaus.local; Initial Catalog=PAMESAN; persist security info=True; user id=pamesan-rw; password=******" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DatabaseContext -Tables RawData, ProcessedData
+  \end{lstlisting}
+
+  \pause
+
   \smartdiagramset{
     uniform color list=white for 4 items,
     uniform arrow color=true,
@@ -548,13 +550,6 @@ def rmq_sender(queue: Queue):
     back arrow disabled=true}
   \smartdiagram[flow diagram:horizontal]{Commit auf main-branch,
     GitLab Pipeline, Docker Image, Docker Swarm}
-
-  \pause
-
-  \begin{lstlisting}[style=bash-style,
-    breaklines=true]
-    Scaffold-DbContext "Data Source=sql-mar-01.druckhaus.local; Initial Catalog=PAMESAN; persist security info=True; user id=pamesan-rw; password=******" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DatabaseContext -Tables RawData, ProcessedData
-\end{lstlisting}
 \end{frame}
 
 
@@ -661,7 +656,7 @@ def calculate_length(sensor_spacing: float, right_in: int, left_in: int, left_ou
 
 
 \section{Fazit}
-\begin{frame}[fragile]{Soll-/Ist-Vergleich}
+\begin{frame}[fragile]{Abschließender Zeitablauf}
   \begin{tikzpicture}
 
     \draw (0cm,0cm) -- (9.5cm,0cm);  %Abzisse
@@ -711,7 +706,7 @@ def calculate_length(sensor_spacing: float, right_in: int, left_in: int, left_ou
 \begin{frame}[fragile]{Lessons Learned und Ausblick}
   \textbf{Lessons Learned}
   \begin{itemize}
-    \item YOLOv7 als mit geringem Vorwissen leicht einsetzbarer Objektdetektor
+    \item YOLOv7 ist ein mit geringem Vorwissen leicht einsetzbarer Objektdetektor
           \pause
     \item Pufferzeit sollte \SI{2}{\percent} der Gesamtzeit betragen
           \pause
