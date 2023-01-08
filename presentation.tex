@@ -439,6 +439,19 @@
 \end{frame}
 
 
+\begin{frame}[fragile]{RabbitMQ}
+  \alt<2>{
+    \begin{figure}[htpb]
+      \centering
+      \includegraphics[width=0.75\textwidth]{pics/Architektur.png}
+    \end{figure}}
+  {\begin{figure}[htpb]
+      \centering
+      \includegraphics[width=1\textwidth]{pics/rabbitmq-broker.jpg}
+    \end{figure}}
+\end{frame}
+
+
 \begin{frame}[fragile]{Programmübersicht}
   \begin{figure}[htpb]
     \centering
@@ -508,19 +521,6 @@ def rmq_sender(queue: Queue):
           time.sleep(0.5)
       except Exception as ex: <@\\\large\vdots@>
 \end{lstlisting}
-\end{frame}
-
-
-\begin{frame}[fragile]{RabbitMQ}
-  \alt<2>{
-    \begin{figure}[htpb]
-      \centering
-      \includegraphics[width=0.75\textwidth]{pics/Architektur.png}
-    \end{figure}}
-  {\begin{figure}[htpb]
-      \centering
-      \includegraphics[width=1\textwidth]{pics/rabbitmq-broker.jpg}
-    \end{figure}}
 \end{frame}
 
 
@@ -642,7 +642,20 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
 
 
 \begin{frame}[fragile]{Berechnung der Paketgröße}
-  \textbf{HIER BERECHNUNG ERSTELLEN UND EINFÜGEN}
+  \begin{lstlisting}[style=MyPythonStyle,
+    breaklines=true, firstnumber=8]
+def calculate_height(top_bottom: int, top_cm: int) -> int:
+    return top_bottom - top_cm
+
+def calculate_width(left_right: int, left_cm: int, right_cm) -> int:
+    return left_right - left_cm - right_cm
+
+def calculate_length(sensor_spacing: float, right_in: int, left_in: int, left_out: int) -> int:
+    speed = sensor_spacing / (right_in - left_in)
+    length = int((left_out - left_in) * speed)
+
+    return length
+  \end{lstlisting}
 \end{frame}
 
 
@@ -922,11 +935,11 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
 
 \appendix
 
-\begin{frame}[allowframebreaks]{Literaturverzeichnis}
+% \begin{frame}[allowframebreaks]{Literaturverzeichnis}
 
-  \printbibliography[title={Quellenverzeichnis}]
+%   \printbibliography[title={Quellenverzeichnis}]
 
-\end{frame}
+% \end{frame}
 
 \begin{frame}[standout]
   Danke für die Aufmerksamkeit!
