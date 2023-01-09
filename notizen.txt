@@ -118,3 +118,54 @@ Die gemessenen Paketabmessungen werden mit bekannten Abmessungen verglichen und 
 Der Sensortraeger wird an anderen Standorten aufgebaut.
 
 Hier bedanke ich mich fuer Ihre Aufmerksamkeit und freue mich auf Ihre Fragen!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+erklaere mir ein fully convolutional network als waere ich fuenf.
+
+Ein fully convolutional network ist ein besonderes Art von Künstlicher Intelligenz, die dazu verwendet wird, Bilder zu analysieren und bestimmte Dinge in ihnen zu erkennen. Stell dir vor, du hast ein Puzzle mit vielen kleinen Teilen. Du möchtest herausfinden, welche Teile zusammengehören und welche nicht. Ein fully convolutional network ist wie ein Computer, der dir dabei hilft, das Puzzle zu lösen. Er schaut sich alle Teile genau an und versucht herauszufinden, welche Teile zusammengehören.
+
+Um das Puzzle zu lösen, verwendet das fully convolutional network etwas, das man "Konvolutionen" nennt. Das ist wie ein Filter, der über das Puzzle geht und bestimmte Dinge sucht. Zum Beispiel könnte der Filter nach blauen Teilen suchen oder nach Linien. Wenn der Filter etwas findet, das ihm wichtig erscheint, merkt er es sich und schickt es weiter an einen anderen Teil des Computers, der dann versucht, mehr darüber herauszufinden.
+
+Am Ende hat das fully convolutional network das ganze Puzzle untersucht und weiß, welche Teile zusammengehören. Es kann dir sagen, welche Teile zusammengehören und wo sie im Puzzle hingehören, damit du das Puzzle schneller lösen kannst.
+wofuer steht das fully in fully convolutional network?
+
+Das "fully" in "fully convolutional network" bedeutet "vollständig". Ein fully convolutional network ist ein Netzwerk, das vollständig aus Konvolutionen besteht. Eine Konvolution ist eine Art Filter, der über das Bild geht und bestimmte Dinge sucht. Das fully convolutional network verwendet also nur Konvolutionen, um das Bild zu analysieren und Dinge darin zu erkennen.
+
+Andere Arten von Netzwerken können auch Konvolutionen verwenden, aber sie haben auch andere Arten von Schichten, wie zum Beispiel vollständig verbundene Schichten oder Pooling-Schichten. Ein fully convolutional network hingegen besteht nur aus Konvolutionen und hat keine anderen Schichten. Das macht es besonders gut dafür geeignet, Bilder zu analysieren und Dinge darin zu erkennen.
+erklaere mir yolov7 als waere ich 5.
+
+YOLO steht für "You Only Look Once". YOLO ist eine Art von Künstlicher Intelligenz, die dazu verwendet wird, Bilder zu analysieren und bestimmte Dinge darin zu erkennen. Stell dir vor, du hast ein Bild von einer Stadt und du möchtest wissen, was alles auf dem Bild ist. YOLO ist wie ein Computer, der dir dabei hilft, das herauszufinden.
+
+YOLO schaut sich das Bild genau an und sucht nach Dingen, die wichtig sind. Zum Beispiel könnte es nach Autos, Häusern oder Menschen suchen. Wenn YOLO etwas findet, das ihm wichtig erscheint, zeichnet es einen Rahmen um das Ding und sagt dir, was es ist. YOLO kann dir also sagen, wie viele Autos es auf dem Bild gibt oder wo die Häuser sind.
+
+YOLOv7 ist eine besondere Art von YOLO. Es ist eine der neuesten Versionen und ist besonders gut darin, Dinge auf Bildern zu erkennen. Es ist wie ein Computer, der sehr gut darin ist, Rätsel zu lösen und Dinge herauszufinden.
+Was ist Semantische Segmentierung?
+
+Semantische Segmentierung ist eine Art von Computerverarbeitung, bei der man versucht, jedem Pixel in einem Bild eine bestimmte Bedeutung oder eine bestimmte Klasse zuzuordnen. Stell dir vor, du hast ein Bild von einer Stadt und du möchtest wissen, wo der Himmel aufhört und der Boden anfängt. Du könntest jedem Pixel im Bild eine Klasse zuordnen, zum Beispiel "Himmel", "Boden" oder "Gebäude". Das nennt man Semantische Segmentierung.
+
+Semantische Segmentierung ist sehr nützlich, wenn man versucht, Computer dazu zu bringen, Bilder so zu verstehen wie Menschen. Wenn ein Computer weiß, welcher Teil eines Bildes Himmel ist und welcher Teil Boden, kann er das Bild besser verstehen und darüber nachdenken. Man kann Semantische Segmentierung zum Beispiel verwenden, um Autonome Fahrzeuge dabei zu helfen, Straßen zu erkennen oder um Robotern dabei zu helfen, ihre Umgebung zu verstehen.
