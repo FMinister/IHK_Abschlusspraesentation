@@ -37,8 +37,8 @@
 
 \usepackage{graphicx}
 
+% Fuer Notes neben den Folien
 % \usepackage{pgfpages}
-
 % \setbeameroption{show notes on second screen}
 
 \usepackage{siunitx}
@@ -261,10 +261,29 @@
 
 \maketitle
 
+\note[itemize]
+{
+  \item{Guten Morgen}
+  \item{Johannes Leyrer}
+  \item{Implementierung eines neuen Systems zur Erfassung von Versandverpackungen mit Hilfe von Bild- und Sensordaten zur Erfuellung der Novelle des Verpackungsgesetzes}
+  \item{Entwicklung von PaMesAn - Paket-Messungs-Anlage}
+}
+
+
 \begin{frame}{Gliederung}
   \setbeamertemplate{section in toc}[sections]
   \tableofcontents[hideallsubsections]
 \end{frame}
+
+\note[itemize]
+{
+  \item{Projektumfeld}
+  \item{Planungsphase}
+  \item{Analysephase}
+  \item{Entwurf}
+  \item{Implementierung}
+  \item{Fazit und Ausblick}
+}
 
 
 
@@ -279,16 +298,22 @@
     \end{tabular}
   \end{table}
 
+  \note<1->[item]{FLYERALARM GmbH, 2002 gegründet, $>$ 2000 Mitarbeiter und $>$ 3 Mio Produkte}
+
   \pause
 
   \begin{itemize}
     \item Eines der größten E-Commerce Unternehmen Deutschlands
+          \note<2->[item]{Eines der größten E-Commerce Unternehmen Deutschlands}
           \pause
     \item Führende Online-Druckerei Europas im B2B-Bereich
+          \note<3->[item]{Führende Online-Druckerei Europas im B2B-Bereich}
           \pause
     \item Betreibt eigenen Onlineshop
+          \note<4->[item]{Eigener Onlineshop}
           \pause
     \item Erstellung der Druckdaten
+          \note<5->[item]{Zustaendig fuer die Erstellung der Druckdaten}
   \end{itemize}
 \end{frame}
 
@@ -303,14 +328,19 @@
     \end{tabular}
   \end{table}
 
+  \note<1->[item]{FLYERALARM Industrial Print GmbH (FAIP) an 8 Standorten mit ca. 1200 MA}
+
   \pause
 
   \begin{itemize}
     \item Tochtergesellschaft
+          \note<2->[item]{Tochtergesellschaft der FLYERALARM GmbH}
           \pause
     \item Eigene IT-Abteilung
+          \note<3->[item]{Eigene IT-Abteilung}
           \pause
     \item Produktion und Versand
+          \note<4->[item]{Zustaendig fuer Produktion und Versand}
   \end{itemize}
 \end{frame}
 
@@ -349,6 +379,16 @@
   \end{tikzpicture}
 \end{frame}
 
+\note[itemize]
+{
+  \item{10h Analyse}
+  \item{8h Entwurf}
+  \item{39h Implementierung}
+  \item{5h Test}
+  \item{6h Einführung}
+  \item{12h Dokumentation}
+}
+
 
 
 \section{Analyse}
@@ -356,12 +396,16 @@
   \textbf{Ist-Analyse}
   \begin{itemize}
     \item Paketgröße und Anzahl wird manuell gepflegt
+          \note<1->[item]{Manuelle Pflege}
           \pause
     \item Neue Anforderungen durch  Verpackungsgesetz
+          \note<2->[item]{Anforderungen ans Verpackungsgesetz nicht erfüllt}
           \pause
     \item Hoher Wartungsaufwand für Entwickler
+          \note<3->[item]{Hohe Wartung}
           \pause
     \item Paketgröße ungenau
+          \note<4->[item]{Paketgröße ungenau}
   \end{itemize}
 \end{frame}
 
@@ -370,10 +414,13 @@
   \textbf{Soll-Analyse}
   \begin{itemize}
     \item Paketgröße und Anzahl automatisch erfassen
+          \note<1->[item]{Automatische Erfassung}
           \pause
     \item Erfüllung der Anforderungen durch Verpackungsgesetz
+          \note<2->[item]{Helfen bei Anforderungen durch Verpackungsgesetz}
           \pause
     \item Wartungsaufwand minimieren durch automatische Erfassung
+          \note<3->[item]{Wartungsaufwand minimieren}
   \end{itemize}
 \end{frame}
 
@@ -384,6 +431,14 @@
     \includegraphics[width=1\textwidth]{pics/AngebotLoether.png}
   \end{figure}
 \end{frame}
+
+\note[itemize]
+{
+  \item{Angebote eingeholt}
+  \item{Unternehmen Elektro Loether GmbH}
+  \item{Kostenvoranschlauf fuer 4 Standorte}
+  \item{Kesselsdorf 35k Euro}
+}
 
 
 \begin{frame}[fragile]{Kostenverteilung Hardware}
@@ -405,17 +460,24 @@
   \end{table}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Eigenentwicklung}
+  \item{K977,89 Euro Hardware}
+  \item{3 verschiedene Sensor-Typen getestet}
+}
+
 
 \begin{frame}[fragile]{Kostenverteilung Personal und Hardware}
   \begin{table}[htbp]
     \centering
     \begin{tabular}{lrrr}
-      \textbf{Personal}     & \textbf{Zeit in Stunden} & \textbf{Kosten pro Stunde}     & \textbf{Gesamt}          \\ \hline
-      Auszubildender        & 80                       & \SI{6.00}{€} + \SI{15.00}{€}   & \SI{1680.00}{€}          \\
-      Teamleitung           & 2                        & \SI{31.50}{€}  + \SI{15.00}{€} & \SI{93.00}{€}            \\
-      Teammitglied          & 2                        & \SI{21.50}{€}  + \SI{15.00}{€} & \SI{73.00}{€}            \\
-      Haustechnik           & 8                        & \SI{19.00}{€}  + \SI{15.00}{€} & \SI{272.00}{€}           \\ \hline
-      \textbf{Gesamtkosten} &                          &                                & \textbf{\SI{2118.00}{€}}
+      \textbf{Personal}     & \textbf{Zeit in h} & \textbf{Kosten pro h}          & \textbf{Gesamt}          \\ \hline
+      Auszubildender        & 80                 & \SI{6.00}{€} + \SI{15.00}{€}   & \SI{1680.00}{€}          \\
+      Teamleitung           & 2                  & \SI{31.50}{€}  + \SI{15.00}{€} & \SI{93.00}{€}            \\
+      Teammitglied          & 2                  & \SI{21.50}{€}  + \SI{15.00}{€} & \SI{73.00}{€}            \\
+      Haustechnik           & 8                  & \SI{19.00}{€}  + \SI{15.00}{€} & \SI{272.00}{€}           \\ \hline
+      \textbf{Gesamtkosten} &                    &                                & \textbf{\SI{2118.00}{€}}
     \end{tabular}
   \end{table}
 
@@ -423,6 +485,14 @@
 
   \textbf{Gesamtkosten Personal und Hardware: \SI{3095.89}{€}}
 \end{frame}
+
+\note[itemize]
+{
+  \item{2118 Euro Pesonalkosten}
+  \item{Gesamtkosten 3095,89 Euro}
+  \item{Etwa 30k Euro guenstiger in Eigenentwicklung}
+  \item{Entscheidung fuer Eigenentwicklung}
+}
 
 
 
@@ -434,6 +504,14 @@
   \end{figure}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Entwurf}
+  \item{3D Sensortraeger}
+  \item{Sensoren seitlich und oben}
+  \item{Kamera oben}
+}
+
 
 \begin{frame}[fragile]{Standort}
   \begin{figure}[htpb]
@@ -441,6 +519,12 @@
     \includegraphics[width=1\textwidth]{pics/Versandanlage.png}
   \end{figure}
 \end{frame}
+
+\note[itemize]
+{
+  \item{Standort}
+  \item{Versandanlage}
+}
 
 
 \begin{frame}[fragile]{RabbitMQ}
@@ -450,6 +534,14 @@
   \end{figure}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Microservices-Architektur}
+  \item{Kommunikation ueber RabbitMQ}
+  \item{RabbitMQ: Open Source Message Broker Software}
+  \item{Postsystem}
+}
+
 
 \begin{frame}[fragile]{Programmübersicht}
   \begin{figure}[htpb]
@@ -458,6 +550,16 @@
   \end{figure}
 \end{frame}
 
+\note[itemize]
+{
+  \item{4 Services, 2 Exchanges}
+  \item{Datenauslese-Service}
+  \item{Pamesan-Raw-Exchange}
+  \item{Datenspeicherservice}
+  \item{Datenverarbeitungsservice}
+  \item{Datenspeicherservice}
+}
+
 
 \begin{frame}[fragile]{Datenmodell}
   \begin{figure}[htpb]
@@ -465,6 +567,14 @@
     \includegraphics[width=1\textwidth]{pics/Tabellenmodell_schoen.png}
   \end{figure}
 \end{frame}
+
+\note[itemize]
+{
+  \item{Tabellenmodell}
+  \item{3 Tabellen}
+  \item{MSSQL}
+  \item{SiteSpecificValues-Tablle, SensorSpacing}
+}
 
 
 
@@ -484,6 +594,15 @@
   \end{minipage}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Implementierung}
+  \item{Lasersensor}
+  \item{3D Druck}
+  \item{Arduino mit Shield, gute und sichere Verkabelung}
+  \item{Script des Herstellers zum Auslesen der Sensoren}
+}
+
 
 \begin{frame}[fragile]{Umsetzung des Sensorträgers}
   \begin{figure}[htpb]
@@ -492,6 +611,14 @@
   \end{figure}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Haustechnik baut Sensorträger}
+  \item{Kamera leicht nach hinten versetzt}
+  \item{Lasersensor}
+  \item{Arduino-Box und ThinClient hinter Foerderband}
+}
+
 
 \begin{frame}[fragile]{Implementierung des Ausleseservice}
   \begin{figure}[htpb]
@@ -499,6 +626,18 @@
     \includegraphics[width=1\textwidth]{pics/DataReaderDataFlow.png}
   \end{figure}
 \end{frame}
+
+\note[itemize]
+{
+  \item{Python}
+  \item{Multiprocessing anstatt Multithreading wegen Gloabl Interpreter Lock}
+  \item{4 parallele Prozesse}
+  \item{Initialisierung}
+  \item{Serienller Prozess}
+  \item{Evaluierungs Prozess, Schwellwert unterschreiten}
+  \item{Bildaufnahme Prozess}
+  \item{RabbitMQ-Publisher Prozess}
+}
 
 
 \begin{frame}[fragile]{Implementierung des Ausleseservice -- Pika}
@@ -522,6 +661,15 @@ def rmq_sender(queue: Queue):
 \end{lstlisting}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Beispiel RMQ-Publisher}
+  \item{Initialisierung}
+  \item{Verbindungsdaten ueber Umgebungsvariablen}
+  \item{Verbindung ueber Programmbibliothek Pika}
+  \item{While schleife mit 500ms Abfrage}
+}
+
 
 \begin{frame}[fragile]{Implementierung der Datenbanktabellen}
   \begin{lstlisting}[style=sql-style,
@@ -538,12 +686,23 @@ def rmq_sender(queue: Queue):
 \end{lstlisting}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Tabellen zum Speichern}
+  \item{SQL}
+  \item{Auszug fuer RawData}
+}
+
 
 \begin{frame}[fragile]{Implementierung des Datenspeicherservice}
   \begin{lstlisting}[style=bash-style,
     breaklines=true]
     Scaffold-DbContext "Data Source=sql-mar-01.druckhaus.local; Initial Catalog=PAMESAN; persist security info=True; user id=pamesan-rw; password=******" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DatabaseContext -Tables RawData, ProcessedData
   \end{lstlisting}
+
+  \note<1->[item]{C\#}
+  \note<1->[item]{Database first Ansatz}
+  \note<1->[item]{EntityFrameworkCore}
 
   \pause
 
@@ -554,6 +713,8 @@ def rmq_sender(queue: Queue):
     back arrow disabled=true}
   \smartdiagram[flow diagram:horizontal]{Commit auf main-branch,
     GitLab Pipeline, Docker Image, Docker Swarm}
+
+  \note<2->[item]{Deployment Prozess}
 \end{frame}
 
 
@@ -573,6 +734,15 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
 }
 \end{lstlisting}
 \end{frame}
+
+\note[itemize]
+{
+  \item{Code Beispiel fuer RawData}
+  \item{Dependency Injektion Datenbankkontext}
+  \item{Deserialisierung des JSON-Objekts}
+  \item{Speichern in Datenbank}
+  \item{Fehler zur Aufrufenden Methode durchreichen}
+}
 
 
 \begin{frame}[fragile]{Implementierung des Datenverarbeitungsservice}
@@ -607,6 +777,47 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
   \end{minipage}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Datenverarbeitungsservice in Python}
+  \item{RMQ-Subscriber fragen Daten ab}
+  \item{Paketerkennung}
+  \item{Erkennte Paket zuschneiden}
+  \item{Labelerkennung mit OpenCV}
+  \item{Barcode auslesen mit pyzbar}
+  \item{Paketgröße berechnen}
+  \item{Mit RabbitMQ publishen}
+}
+
+
+\begin{frame}[fragile]{Problemstellung Rollen und YOLOv7}
+  \begin{minipage}[t]{0.49\textwidth}
+    \begin{figure}[htpb]
+      \centering
+      \includegraphics[angle=90,origin=c,width=1\textwidth]{pics/ShippingBox.jpg}
+    \end{figure}
+
+    \note<1->[item]{OpenCV Problem}
+    \note<1->[item]{Spiegelende Rollen}
+    \note<1->[item]{Loesung: Machine Learning}
+  \end{minipage}
+  \begin{minipage}[t]{0.49\textwidth}
+    \pause
+    \textbf{YOLOv7}
+    \note<2->[item]{YOLOv7: You Only Look Once, Objektdetektor}
+    \begin{itemize}
+      \item Fully Convolutional Neural Network
+            \note<2->[item]{FCNN: Neuronales Netzwerk, das nur aus Filtern besteht}
+            \pause
+      \item Erkennung von Objekten durch Semantische Segmentierung
+            \note<3->[item]{Suche nach Bedeutung in Bildern, pixelweise}
+            \pause
+      \item Leichtes Training durch Bag of Freebies und Transfer Learning
+            \note<4->[item]{Bag of Freebies: Methoden, die die Performance eines Modells erhöhen, ohne die Trainingszeit zu verlängern}
+    \end{itemize}
+  \end{minipage}
+\end{frame}
+
 
 \begin{frame}[fragile]{Labeln der Bilder}
   \begin{figure}[htpb]
@@ -614,6 +825,13 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
     \includegraphics[width=1\textwidth]{pics/labelImg.png}
   \end{figure}
 \end{frame}
+
+\note[itemize]
+{
+  \item{Labeln der Bilder}
+  \item{LabelImg}
+  \item{100 Bilder}
+}
 
 
 \begin{frame}[fragile]{Training des YOLOv7-Models}
@@ -623,6 +841,14 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
   \end{lstlisting}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Datensatz in 80\% Trainingsdaten und 20\% Validierungsdaten aufteilen}
+  \item{Traingsbefehlt hier zu sehen}
+  \item{batch size wie viele Bilder gleichzeitig}
+  \item{100 Durchgaengen (--epochs) vor und zurueck}
+}
+
 
 \begin{frame}[fragile]{Ergebnis des YOLOv7-Models}
   \begin{figure}[htpb]
@@ -631,13 +857,26 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
   \end{figure}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Ergebnis YOLOv7}
+  \item{Model 94\% sicher, dass es ein Versandkarton ist}
+  \item{Falls Zeit ist, MiniDemo nach der Praesentation}
+}
 
-\begin{frame}[fragile]{Auslesen des Versandlabels}
+
+\begin{frame}[fragile]{Auslesen des Versandlabels und Barcodes}
   \begin{figure}[htpb]
     \centering
     \includegraphics[width=1\textwidth]{pics/barcode.png}
   \end{figure}
 \end{frame}
+
+\note[itemize]
+{
+  \item{Versandlabelerkennung mit OpenCV}
+  \item{Barcodeerkennung mit pyzbar}
+}
 
 
 \begin{frame}[fragile]{Berechnung der Paketgröße}
@@ -656,6 +895,13 @@ def calculate_length(sensor_spacing: float, right_in: int, left_in: int, left_ou
     return length
   \end{lstlisting}
 \end{frame}
+
+\note[itemize]
+{
+  \item{Hoehe: Bekannter Abstand Sensor--Foerderband minus gemessener Abstand}
+  \item{Breite: Bekannter Abstand der Sensoren minus gemessener Abstand}
+  \item{Laenge: Berechnung durch Geschwindigkeit und bekannntem Versatz der seitlichen Sensoren}
+}
 
 
 
@@ -706,239 +952,55 @@ def calculate_length(sensor_spacing: float, right_in: int, left_in: int, left_ou
   \end{tikzpicture}
 \end{frame}
 
+\note[itemize]
+{
+  \item{Abschließender Zeitablauf}
+  \item{Anfangs gut}
+  \item{Implementierung durch Paketerkennung verzoegert}
+  \item{Test und Einführung stark abgeschwaecht}
+  \item{Dokumentation im Zeitplan}
+}
+
 
 \begin{frame}[fragile]{Lessons Learned und Ausblick}
+  \note<1->[item]{Was habe ich aus dem Projekt mitgenommen?}
   \textbf{Lessons Learned}
   \begin{itemize}
     \item YOLOv7 ist ein mit geringem Vorwissen leicht einsetzbarer Objektdetektor
+          \note<1->[item]{YOLOv7 privat genutzt und gut einsetzbar}
           \pause
     \item Pufferzeit sollte \SI{2}{\percent} der Gesamtzeit betragen
+          \note<2->[item]{Mehr Pufferzeit}
           \pause
     \item Industriekamera $>$ Webcam $\rightarrow$ KEYENCE-Scanner
+          \note<3->[item]{Budget besser setzen}
   \end{itemize}
 
   \pause
 
   \textbf{Ausblick}
+  \note<4->[item]{Ausblick bzw. hier und jetzt}
   \begin{itemize}
     \item Verwendung KEYENCE-Scanner und Umschreiben auf C\#
+          \note<4->[item]{KEYENCE, Umschreiben auf C\#, Wegfall von YOLOv7}
           \pause
     \item Verknüpfung erfasster Abmessungen mit bekannten Kartonagen
+          \note<5->[item]{Bekannte Kartonage}
           \pause
     \item Aufbau an anderen Standorten
+          \note<6->[item]{Aufbau an anderen Standorten}
   \end{itemize}
 \end{frame}
 
-
-
-
-% Show the slide as if horizontal blinds were pulled away.
-% \transblindshorizontal
-
-% Show the slide as if vertical blinds were pulled away.
-% \transblindsvertical
-
-% Show the slide by moving to the center from all four sides.
-% \transboxin
-
-% Show the slide by showing more and more of a rectangular area that is centered on the slide center
-% \transboxout
-
-% Slowly dissolve what was shown before
-% \transdissolve
-
-% Glitter sweeps in specified direction
-% \transglitter
-
-% Show the slide by sweeping two vertical lines from the sides inward.
-% \transsplitverticalin
-
-% Show the slide by sweeping two vertical lines from the center outward.
-% \transsplitverticalout
-
-% Show the slide by sweeping two horizontal lines from the sides inward.
-% \transsplithorizontalin
-
-% Show the slide by sweeping two horizontal lines from the center outward.
-% \transsplithorizontalout
-
-% Sweeps single line in specified direction
-% \transwipe
-
-% Show slide specified number of seconds
-% \transduration{2}
-
-% Show the slide by pushing what was shown before off the screen using the new content.
-% \transpush
-
-% Replace the previous slide directly (default behaviour).
-% \transreplace
-
-% Show the slide by covering the content that was shown before
-% \transcover
-
-
-
-
-% \begin{frame}
-%   \transglitter<2-4> %means that the effect is within the frame but only for slide 2 to 4
-
-%   \frametitle{Test}
-%   \begin{itemize}
-%     \item \onslide<2->{One} %shown from slide 2 till last slide of this frame
-%     \item \onslide<3->{Two}
-%     \item \onslide<4->{Three}
-%   \end{itemize}
-% \end{frame}
-
-
-
-% \section{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
-% \begin{frame}[fragile]{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
-%   \begin{itemize}
-%     \item Atmosphäre hat 400 ppm CO$_2$ \autocite{umweltbundesamt}
-%     \item ab 1000 ppm CO$_2$ bedenklich laut DGUV ASR A3.6 \autocite{ASR}
-%     \item ab 950 ppm CO$_2$ bedenklich laut DIN EN 16798-1 \autocite{din_en_16798}
-%   \end{itemize}
-% \end{frame}
-
-% \begin{frame}[fragile]{CO$_2$-Grenzwerte für eine unbedenkliche Atemluft}
-%   \begin{table}
-%     \caption{nach DGUV ASR A3.6 \autocite{ASR}}
-%     \begin{tabular}{ |c|p{0.49\textwidth}|}
-%       \hline
-%       CO$_2$-Konzentration in ppm & Bewertung               \\ \hline
-%       $<$1000                     & hygienisch unbedenklich \\ \hline
-%       1000-2000                   & hygienisch auffällig    \\ \hline
-%       $>$2000                     & hygienisch inakzeptabel \\ \hline
-%     \end{tabular}
-%   \end{table}
-%   \begin{table}
-%     \caption{nach DIN EN 16798-1 \autocite{din_en_16798}}
-%     \begin{tabular}{|c|p{0.49\textwidth}|}
-%       \hline
-%       CO$_2$-Konzentration in ppm & Bewertung                 \\ \hline
-%       $<$950                      & Hohe Raumluftqualität     \\ \hline
-%       950-1200                    & Mittlere Raumluftqualität \\ \hline
-%       1200-1750                   & Mäßige Raumluftqualität   \\ \hline
-%       $>$1750                     & Niedrige Raumluftqualität \\ \hline
-%     \end{tabular}
-%   \end{table}
-% \end{frame}
-
-% \section{Auswirkungen eines zu hohen CO$_2$-Gehaltes in der Raumluft}
-% \begin{frame}[fragile]{Auswirkungen eines zu hohen CO$_2$-Gehaltes in der Raumluft}
-%   \begin{itemize}
-%     \item verringerte Konzentrationsfähigkeit
-%     \item verringerte Leistungsfähigkeit
-%     \item Halsschmerzen
-%     \item Kopfschmerzen
-%     \item Unwohlsein
-%     \item Müdigkeit
-%     \item Hustenanfälle
-%   \end{itemize}
-
-%   Quellen: \autocite{umweltbundesamt} \autocite{din_en_16798} \autocite{ASR} \autocite{kajtar} \autocite{zhang} \autocite{myhrvold} \autocite{tiesler}
-% \end{frame}
-
-% \section{Hardwaretechnische Umsetzung}
-
-% \begin{frame}[fragile]{Raspberry Pi 3B+}
-%   \begin{figure}
-%     \centering
-%     \captionsetup{justification=centering}
-%     \includegraphics[width=0.55\textwidth]{pictures/RasPi.png}
-%     \caption{Raspberry Pi 3B+ \autocite{rasPi}}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}[fragile]{CO$_2$-Sensor}
-%   \begin{figure}
-%     \centering
-%     \captionsetup{justification=centering}
-%     \includegraphics[trim={0 10cm 0 10cm},clip,width=0.85\textwidth]{pictures/co2monitor.png}
-%     \caption{TFA Dostmann AIRCO2NTROL MINI \autocite{co2monitor}}
-%   \end{figure}
-% \end{frame}
-
-
-% \section{Softwaretechnische Umsetzung}
-
-% \subsection{Grundlagen}
-% \begin{frame}[fragile]{Grundlagen}
-%   \begin{minipage}[t]{0.49\textwidth}
-%     \begin{itemize}
-%       \item Linux-Distribution inklusive mitgelieferter Standardsoftware
-%       \item Docker
-%       \item Python
-%       \item FastAPI
-%       \item React
-%       \item ChartJs
-%       \item SQLite
-%     \end{itemize}
-%   \end{minipage}
-%   \begin{minipage}[t]{0.49\textwidth}
-%     \begin{figure}
-%       \centering
-%       \captionsetup{justification=centering}
-%       \includegraphics[width=1\textwidth]{pictures/SoftwareKomponenten.png}
-%       \caption{Verwendete Softwarekomponenten \autocite{dockerLogo}\autocite{fastapiLogo}\autocite{sqliteLogo}\autocite{reactLogo}\autocite{pythonLogo}\autocite{chartjsLogo}}
-%     \end{figure}
-%   \end{minipage}
-% \end{frame}
-
-% \subsection{Zusammenspiel der Softwarekomponenten}
-
-% \begin{frame}[fragile]{Zusammenspiel der Softwarekomponenten}
-%   \begin{figure}
-%     \centering
-%     \captionsetup{justification=centering}
-%     \includegraphics[width=0.6\textwidth]{pictures/SoftwareZusammenspiel.png}
-%     \caption{Zusammenspiel der Softwarekomponenten \autocite{co2monitor}\autocite{rasPi}}
-%   \end{figure}
-% \end{frame}
-
-% \subsection{Aufbau und Einrichtung der Softwarekomponenten}
-
-% \begin{frame}[fragile]{Aufbau und Einrichtung der Softwarekomponenten}
-
-%   \begin{minipage}[t]{0.49\textwidth}
-%     \begin{itemize}
-%       \item Backend: Python mit FastAPI
-%       \item Frontend: React und ChartsJs
-%       \item Lese-Software: Python-Script
-%       \item Datenbank: SQLite
-%     \end{itemize}
-%   \end{minipage}
-
-%   \begin{lstlisting}[language=Bash]
-%     docker-compose -f docker-compose.yml up -d
-%   \end{lstlisting}
-% \end{frame}
-
-% \section{Fazit}
-% \begin{frame}[fragile]{Fazit}
-%   \begin{minipage}[t]{0.80\textwidth}
-%     \textbf{Ergebnisse:}\newline
-%     \begin{itemize}
-%       \item bestätigte Relevanz der Raumluftqualität
-%       \item bestätigte Verbindung zwischen hohen CO$_2$-Konzentrationen und verminderter Konzentrationsfähigkeit/Produktivität
-%       \item schaffen einer kostengünstigen Möglichkeit zur selbstständigen Kontrolle der Raumluftqualität
-%     \end{itemize}
-%   \end{minipage}
-% \end{frame}
 
 \begin{frame}[standout]
   Fragen?
 \end{frame}
 
+
+
 \appendix
 
-% \begin{frame}[allowframebreaks]{Literaturverzeichnis}
-
-%   \printbibliography[title={Quellenverzeichnis}]
-
-% \end{frame}
 
 \begin{frame}[standout]
   Danke für die Aufmerksamkeit!
