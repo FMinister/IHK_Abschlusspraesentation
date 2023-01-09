@@ -294,11 +294,11 @@
   \begin{table}
     \begin{tabular}{lll}
       2002      & $>$ 2000    & $>$ 3 Mio \\
-      gegründet & Mitarbeiter & Produkte  \\
+      gegründet & Mitarbeitende & Produkte  \\
     \end{tabular}
   \end{table}
 
-  \note<1->[item]{FLYERALARM GmbH, 2002 gegründet, $>$ 2000 Mitarbeiter und $>$ 3 Mio Produkte}
+  \note<1->[item]{FLYERALARM GmbH, 2002 gegründet, $>$ 2000 Mitarbeitende und $>$ 3 Mio Produkte}
 
   \pause
 
@@ -324,11 +324,11 @@
   \begin{table}
     \begin{tabular}{lll}
       8         & ca. 1200    \\
-      Standorte & Mitarbeiter \\
+      Standorte & Mitarbeitende \\
     \end{tabular}
   \end{table}
 
-  \note<1->[item]{FLYERALARM Industrial Print GmbH (FAIP) an 8 Standorten mit ca. 1200 MA}
+  \note<1->[item]{FLYERALARM Industrial Print GmbH (FAIP) an 8 Standorten mit ca. 1200 Mitarbeitenden}
 
   \pause
 
@@ -396,17 +396,14 @@
 \begin{frame}[fragile]{Ist-Analyse}
   \textbf{Ist-Analyse}
   \begin{itemize}
-    \item Paketgröße und Anzahl wird manuell gepflegt
-          \note<1->[item]{Paketgröße und Anzahl wird manuell gepflegt}
+    \item Paketgröße und Anzahl werden manuell gepflegt
+          \note<1->[item]{Paketgröße und Anzahl werden manuell gepflegt}
           \pause
     \item Neue Anforderungen durch  Verpackungsgesetz
           \note<2->[item]{Es gibt neue Anforderungen durch  Verpackungsgesetz}
           \pause
     \item Hoher Wartungsaufwand für pflegende Personen
           \note<3->[item]{Hoher Wartungsaufwand}
-          \pause
-    \item Paketgröße ungenau
-          \note<4->[item]{Berechnete Paketgröße stimmt nicht mit eigentlichem Paket ueber ein}
   \end{itemize}
 \end{frame}
 
@@ -414,7 +411,7 @@
 \begin{frame}[fragile]{Soll-Analyse}
   \textbf{Soll-Analyse}
   \begin{itemize}
-    \item Paketgröße und Anzahl automatisch erfassen
+    \item Paketgröße und Anzahl werden automatisch erfasst
           \note<1->[item]{Automatische Erfassung von Paketgröße und Anzahl}
           \pause
     \item Erfüllung der Anforderungen durch Verpackungsgesetz
@@ -435,9 +432,9 @@
 
 \note[itemize]
 {
-  \item{Angebote eingeholt}
+  \item{Angebote ermittelt}
   \item{Unternehmen Elektro Loether GmbH}
-  \item{Kostenvoranschlauf fuer 4 Standorte}
+  \item{Kostenvoranschlag fuer 4 Standorte}
   \item{Kesselsdorf 35k Euro}
 }
 
@@ -539,7 +536,7 @@
   \item{Microservices-Architektur}
   \item{Kommunikation ueber RabbitMQ}
   \item{RabbitMQ: Open Source Message Broker Software}
-  \item{ERST: Postsystem}
+  \item{Analog zum Postsystem}
   \item{DANN: RabbitMQ}
 }
 
@@ -572,9 +569,9 @@
 
 \note[itemize]
 {
+  \item{MSSQL}
   \item{Tabellenmodell}
   \item{3 Tabellen}
-  \item{MSSQL}
   \item{SiteSpecificValues-Tablle, SensorSpacing}
 }
 
@@ -601,7 +598,7 @@
   \item{Implementierung}
   \item{Lasersensor}
   \item{3D Druck}
-  \item{Arduino mit Shield, gute und sichere Verkabelung}
+  \item{Minicomputer Arduino mit Shield, gute und sichere Verkabelung}
   \item{Script des Herstellers zum Auslesen der Sensoren}
 }
 
@@ -673,29 +670,6 @@ def rmq_sender(queue: Queue):
 }
 
 
-\begin{frame}[fragile]{Implementierung der Datenbanktabellen}
-  \begin{lstlisting}[style=sql-style,
-    breaklines=true]
-    CREATE TABLE PAMESAN.dbo.RawData (
-        UUID uniqueidentifier NOT NULL,
-        Site int NOT NULL,
-        [Datetime] datetime NULL,
-        LeftIn nvarchar(50) COLLATE Latin1_General_CI_AS NULL, <@\\\large\vdots \setcounter{lstnumber}{13}@>
-        [Image] varbinary(MAX) NULL,
-        CONSTRAINT PK_RawData PRIMARY KEY (UUID),
-        CONSTRAINT RawData_FK FOREIGN KEY (Site) REFERENCES PAMESAN.dbo.SiteSpecificValues(Id)
-    );
-\end{lstlisting}
-\end{frame}
-
-\note[itemize]
-{
-  \item{Tabellen zum Speichern}
-  \item{SQL}
-  \item{Auszug fuer RawData}
-}
-
-
 \begin{frame}[fragile]{Implementierung des Datenspeicherservice}
   \begin{lstlisting}[style=bash-style,
     breaklines=true]
@@ -703,7 +677,7 @@ def rmq_sender(queue: Queue):
   \end{lstlisting}
 
   \note<1->[item]{C\#}
-  \note<1->[item]{Database first Ansatz}
+  \note<1->[item]{Database first Ansatz, Tabellen wurden vorher mit SQL erstellt}
   \note<1->[item]{EntityFrameworkCore}
   \note<1->[item]{DatenbankKontext und Tabellenmodelle werden automatisch erstellt}
 
@@ -800,7 +774,7 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
       \includegraphics[angle=90,origin=c,width=0.8\textwidth]{pics/ShippingBox.jpg}
     \end{figure}
 
-    \note<1->[item]{OpenCV Problem}
+    \note<1->[item]{OpenCV, OpenComputerVision, Problem}
     \note<1->[item]{Spiegelende Rollen}
     \note<1->[item]{Loesung: Machine Learning}
   \end{minipage}
