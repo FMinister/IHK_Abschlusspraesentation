@@ -387,6 +387,7 @@
   \item{5h Test}
   \item{6h Einführung}
   \item{12h Dokumentation}
+  \item{Implementierung so gross wegen der Bilderkennung}
 }
 
 
@@ -396,16 +397,16 @@
   \textbf{Ist-Analyse}
   \begin{itemize}
     \item Paketgröße und Anzahl wird manuell gepflegt
-          \note<1->[item]{Manuelle Pflege}
+          \note<1->[item]{Paketgröße und Anzahl wird manuell gepflegt}
           \pause
     \item Neue Anforderungen durch  Verpackungsgesetz
-          \note<2->[item]{Anforderungen ans Verpackungsgesetz nicht erfüllt}
+          \note<2->[item]{Es gibt neue Anforderungen durch  Verpackungsgesetz}
           \pause
-    \item Hoher Wartungsaufwand für Entwickler
-          \note<3->[item]{Hohe Wartung}
+    \item Hoher Wartungsaufwand für pflegende Personen
+          \note<3->[item]{Hoher Wartungsaufwand}
           \pause
     \item Paketgröße ungenau
-          \note<4->[item]{Paketgröße ungenau}
+          \note<4->[item]{Berechnete Paketgröße stimmt nicht mit eigentlichem Paket ueber ein}
   \end{itemize}
 \end{frame}
 
@@ -463,7 +464,7 @@
 \note[itemize]
 {
   \item{Eigenentwicklung}
-  \item{K977,89 Euro Hardware}
+  \item{977,89 Euro Hardware}
 }
 
 
@@ -538,7 +539,8 @@
   \item{Microservices-Architektur}
   \item{Kommunikation ueber RabbitMQ}
   \item{RabbitMQ: Open Source Message Broker Software}
-  \item{Postsystem}
+  \item{ERST: Postsystem}
+  \item{DANN: RabbitMQ}
 }
 
 
@@ -556,6 +558,7 @@
   \item{Pamesan-Raw-Exchange}
   \item{Datenspeicherservice}
   \item{Datenverarbeitungsservice}
+  \item{Pamesan-Processed-Exchange}
   \item{Datenspeicherservice}
 }
 
@@ -632,8 +635,8 @@
   \item{Multiprocessing anstatt Multithreading wegen Gloabl Interpreter Lock}
   \item{4 parallele Prozesse}
   \item{Initialisierung}
-  \item{Serienller Prozess}
-  \item{Evaluierungs Prozess, Schwellwert unterschreiten}
+  \item{Serieller Prozess}
+  \item{Evaluierungs Prozess, FrameRequest, Schwellwert unterschreiten}
   \item{Bildaufnahme Prozess}
   \item{RabbitMQ-Publisher Prozess}
 }
@@ -662,7 +665,7 @@ def rmq_sender(queue: Queue):
 
 \note[itemize]
 {
-  \item{Beispiel RMQ-Publisher}
+  \item{Beispiel RabbitMQ, also RMQ-Publisher}
   \item{Initialisierung}
   \item{Verbindungsdaten ueber Umgebungsvariablen}
   \item{Verbindung ueber Programmbibliothek Pika}
@@ -702,6 +705,7 @@ def rmq_sender(queue: Queue):
   \note<1->[item]{C\#}
   \note<1->[item]{Database first Ansatz}
   \note<1->[item]{EntityFrameworkCore}
+  \note<1->[item]{DatenbankKontext und Tabellenmodelle werden automatisch erstellt}
 
   \pause
 
@@ -781,7 +785,7 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
   \item{Datenverarbeitungsservice in Python}
   \item{RMQ-Subscriber fragen Daten ab}
   \item{Paketerkennung}
-  \item{Erkennte Paket zuschneiden}
+  \item{Bild entsprechend erkanntem Paket zuschneiden}
   \item{Labelerkennung mit OpenCV}
   \item{Barcode auslesen mit pyzbar}
   \item{Paketgröße berechnen}
