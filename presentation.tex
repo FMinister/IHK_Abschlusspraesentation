@@ -38,8 +38,8 @@
 \usepackage{graphicx}
 
 % Fuer Notes neben den Folien
-% \usepackage{pgfpages}
-% \setbeameroption{show notes on second screen}
+\usepackage{pgfpages}
+\setbeameroption{show notes on second screen}
 
 \usepackage{siunitx}
 \sisetup{
@@ -414,10 +414,10 @@
   \textbf{Soll-Analyse}
   \begin{itemize}
     \item Paketgröße und Anzahl automatisch erfassen
-          \note<1->[item]{Automatische Erfassung}
+          \note<1->[item]{Automatische Erfassung von Paketgröße und Anzahl}
           \pause
     \item Erfüllung der Anforderungen durch Verpackungsgesetz
-          \note<2->[item]{Helfen bei Anforderungen durch Verpackungsgesetz}
+          \note<2->[item]{Grundlage legen um Anforderungen des Verpackungsgesetzes gerecht zu werden}
           \pause
     \item Wartungsaufwand minimieren durch automatische Erfassung
           \note<3->[item]{Wartungsaufwand minimieren}
@@ -464,7 +464,6 @@
 {
   \item{Eigenentwicklung}
   \item{K977,89 Euro Hardware}
-  \item{3 verschiedene Sensor-Typen getestet}
 }
 
 
@@ -490,7 +489,7 @@
 {
   \item{2118 Euro Pesonalkosten}
   \item{Gesamtkosten 3095,89 Euro}
-  \item{Etwa 30k Euro guenstiger in Eigenentwicklung}
+  \item{Etwa 20k - 30k Euro guenstiger in Eigenentwicklung}
   \item{Entscheidung fuer Eigenentwicklung}
 }
 
@@ -794,7 +793,7 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
   \begin{minipage}[t]{0.49\textwidth}
     \begin{figure}[htpb]
       \centering
-      \includegraphics[angle=90,origin=c,width=1\textwidth]{pics/ShippingBox.jpg}
+      \includegraphics[angle=90,origin=c,width=0.8\textwidth]{pics/ShippingBox.jpg}
     \end{figure}
 
     \note<1->[item]{OpenCV Problem}
@@ -810,10 +809,10 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
             \note<2->[item]{FCNN: Neuronales Netzwerk, das nur aus Filtern besteht}
             \pause
       \item Erkennung von Objekten durch Semantische Segmentierung
-            \note<3->[item]{Suche nach Bedeutung in Bildern, pixelweise}
+            \note<3->[item]{Erkennung von Objekten durch Semantische Segmentierung -- Suche nach Bedeutung in Bildern, pixelweise}
             \pause
       \item Leichtes Training durch Bag of Freebies und Transfer Learning
-            \note<4->[item]{Bag of Freebies: Methoden, die die Performance eines Modells erhöhen, ohne die Trainingszeit zu verlängern}
+            \note<4->[item]{Transfer Learning und Bag of Freebies: Methoden, die die Performance eines Modells erhöhen, ohne die Trainingszeit zu verlängern}
     \end{itemize}
   \end{minipage}
 \end{frame}
@@ -844,7 +843,7 @@ internal static void SaveDataToRaw(string data, PAMESANContext dbContext) {
 \note[itemize]
 {
   \item{Datensatz in 80\% Trainingsdaten und 20\% Validierungsdaten aufteilen}
-  \item{Traingsbefehlt hier zu sehen}
+  \item{Traingsbefehl hier zu sehen}
   \item{batch size wie viele Bilder gleichzeitig}
   \item{100 Durchgaengen (--epochs) vor und zurueck}
 }
@@ -972,8 +971,8 @@ def calculate_length(sensor_spacing: float, right_in: int, left_in: int, left_ou
     \item Pufferzeit sollte \SI{2}{\percent} der Gesamtzeit betragen
           \note<2->[item]{Mehr Pufferzeit}
           \pause
-    \item Industriekamera $>$ Webcam $\rightarrow$ KEYENCE-Scanner
-          \note<3->[item]{Budget besser setzen}
+    \item Industriekamera $>$ Webcam
+          \note<3->[item]{Budget besser setzen, Industriekamera $>$ Webcam}
   \end{itemize}
 
   \pause
@@ -985,7 +984,7 @@ def calculate_length(sensor_spacing: float, right_in: int, left_in: int, left_ou
           \note<4->[item]{KEYENCE, Umschreiben auf C\#, Wegfall von YOLOv7}
           \pause
     \item Verknüpfung erfasster Abmessungen mit bekannten Kartonagen
-          \note<5->[item]{Bekannte Kartonage}
+          \note<5->[item]{Gemessene mit Bekannte Kartonagen verknuepfen}
           \pause
     \item Aufbau an anderen Standorten
           \note<6->[item]{Aufbau an anderen Standorten}
