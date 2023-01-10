@@ -176,3 +176,10 @@ Semantische Segmentierung ist sehr nützlich, wenn man versucht, Computer dazu z
 
 
 Automatische Erfassung, weil jeder in der Firma verpackt wie er will. Es reicht nicht mehr aus, luzid zu melden, dass man 18t verschickt hat, sondern es mueesen genauere Angaben gemacht werden. Also welche Art, welche Abmessungen, wohin.
+
+serielle schnittstelle
+rabbitmq warum, welches gesetz
+warum mssql, besonderheiten?
+verpackungsgesetz
+hardware, arduino auf einen berechnen
+
