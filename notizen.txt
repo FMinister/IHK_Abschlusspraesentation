@@ -169,3 +169,10 @@ Was ist Semantische Segmentierung?
 Semantische Segmentierung ist eine Art von Computerverarbeitung, bei der man versucht, jedem Pixel in einem Bild eine bestimmte Bedeutung oder eine bestimmte Klasse zuzuordnen. Stell dir vor, du hast ein Bild von einer Stadt und du möchtest wissen, wo der Himmel aufhört und der Boden anfängt. Du könntest jedem Pixel im Bild eine Klasse zuordnen, zum Beispiel "Himmel", "Boden" oder "Gebäude". Das nennt man Semantische Segmentierung.
 
 Semantische Segmentierung ist sehr nützlich, wenn man versucht, Computer dazu zu bringen, Bilder so zu verstehen wie Menschen. Wenn ein Computer weiß, welcher Teil eines Bildes Himmel ist und welcher Teil Boden, kann er das Bild besser verstehen und darüber nachdenken. Man kann Semantische Segmentierung zum Beispiel verwenden, um Autonome Fahrzeuge dabei zu helfen, Straßen zu erkennen oder um Robotern dabei zu helfen, ihre Umgebung zu verstehen.
+
+
+
+
+
+
+Automatische Erfassung, weil jeder in der Firma verpackt wie er will. Es reicht nicht mehr aus, luzid zu melden, dass man 18t verschickt hat, sondern es mueesen genauere Angaben gemacht werden. Also welche Art, welche Abmessungen, wohin.
